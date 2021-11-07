@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib",
+        "module": "CommonJS",
+        "target": "ES6",
+        "declaration": true,
+        "declarationDir": "./types",
+        "rootDir": "./src",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "lib": [
+            "DOM",
+            "ESNext"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "compileOnSave": true
+}

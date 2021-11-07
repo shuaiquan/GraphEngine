@@ -1,0 +1,35 @@
+{
+  "name": "@s7n/canvas2d",
+  "version": "0.0.1",
+  "description": "2D drawing engine rendered using CanvasRenderingContext2D",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build:test": "tsc --noEmit",
+    "build": "rm -rf lib && rm -rf types && tsc",
+    "prepublish": "npm run build",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuaiquan/mathematic/tree/main/packages/canvas2d"
+  },
+  "keywords": [
+    "canvas",
+    "geometry",
+    "graphic",
+    "2D"
+  ],
+  "author": "shuaiquan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shuaiquan/mathematic/issues"
+  },
+  "homepage": "https://github.com/shuaiquan/mathematic/tree/main/packages/canvas2d#readme",
+  "devDependencies": {
+    "typescript": "~4.2.4"
+  },
+  "dependencies": {
+    "@s7n/math": "0.0.4"
+  }
+}
