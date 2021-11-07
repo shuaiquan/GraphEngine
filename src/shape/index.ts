@@ -5,4 +5,6 @@ export { Ellipse } from './Ellipse';
 export { Line } from './Line';
 export { Polygon } from './Polygon';
 export { Rect } from './Rect';
+export { Sector } from './Sector';
+export { BezierCurve } from './BezierCurve';
 export { LineCap, LineJoin, CompleteStyleOption, StyleOption, DEFAULT_STYLE_OPTION, mergeStyleOption } from './style';

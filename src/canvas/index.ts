@@ -1,6 +1,6 @@
 import { Object2D } from '../object';
 import { Renderer } from '../renderer';
-import { PartialStyleOption } from '../shape';
+import { StyleOption } from '../shape';
 import { DEFAULT_CANVAS_OPTION } from './const';
 import { CanvasOption } from './type';
 
@@ -58,7 +58,7 @@ class Canvas2D {
         this.renderer.render(this.viewPort);
     }
 
-    setGlobalStyleOption(styleOption: PartialStyleOption) {
+    setGlobalStyleOption(styleOption: StyleOption) {
         // todo
     }
 

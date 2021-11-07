@@ -101,3 +101,5 @@ class BezierCurve {
         return path;
     }
 }
+
+export { BezierCurve };
