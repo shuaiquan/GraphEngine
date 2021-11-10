@@ -7,8 +7,8 @@
   "scripts": {
     "build:test": "tsc --noEmit",
     "build": "rm -rf lib && rm -rf types && tsc",
-    "prepublish": "npm run build",
-    "test": "jest"
+    "prepublishOnly": "npm run build",
+    "demo": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,15 @@
   },
   "homepage": "https://github.com/shuaiquan/mathematic/tree/main/packages/canvas2d#readme",
   "devDependencies": {
-    "typescript": "~4.2.4"
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-loader": "^9.2.6",
+    "typescript": "~4.2.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
   },
   "dependencies": {
     "@s7n/math": "0.0.4"

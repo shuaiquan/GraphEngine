@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES6",
+        "jsx": "react",
+        "esModuleInterop": true,
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        "sourceMap": true
+    },
+    "include": [
+        "./src/**/*",
+        "./demo/**/*"
+    ],
+}
