@@ -38,6 +38,7 @@ class DOMListener {
 
     constructor(dom: HTMLElement) {
         this.dom = dom;
+        this.addListener(this.dom);
     }
 
     /**
@@ -49,8 +50,39 @@ class DOMListener {
         this.interactions.push(...interactions);
     }
 
+    /**
+     * 移除注册的事件监听交互器
+     * @param interaction 
+     */
+    unRegisterInteraction(interaction: BaseInteraction | BaseInteraction[]) {
+        const interactions = Array.isArray(interaction) ? interaction : [interaction];
+        interactions.forEach(i => {
+            const index = this.interactions.indexOf(i);
+            if (index !== -1) {
+                this.interactions.splice(index, 1);
+            }
+        });
+    }
+
+    /**
+     * 销毁
+     */
+    dispose() {
+        this.removeListener(this.dom);
+        this.dom = null;
+    }
+
+    /**
+     * 触发交互器上的交互事件
+     * @param type 
+     * @param event 
+     */
     private trigger(type: InteractiveType, event: BaseEvent) {
-        // todo
+        // TODO throttle
+        this.interactions.forEach(interaction => {
+            const data = interaction.normalizeEvent(event);
+            interaction.triggerEvent(type, data);
+        })
     }
 
     /**
@@ -172,4 +204,9 @@ class DOMListener {
     }
 }
 
-export { DOMListener };
+export {
+    DOMListener,
+    InteractiveType,
+    BaseEvent,
+    BaseInteraction,
+};
