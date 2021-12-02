@@ -75,6 +75,42 @@ class CoordinateSystem {
         const { origin, scale } = this;
         return origin.add(point.sub(origin).multiply(scale));
     }
+
+    /**
+     * 移动坐标系
+     * @param translate 坐标系的偏移量
+     */
+    dragSystem(translate: Vector2) {
+        if (this.draggable) {
+            const { origin, afterDragCallBack } = this;
+
+            this.origin = origin.add(translate);
+
+            if (afterDragCallBack) {
+                afterDragCallBack();
+            }
+        }
+    }
+
+    /**
+     * 缩放坐标系
+     * @param scaleOrigin 缩放坐标系的原点（缩放时，该位置的相对物理坐标是不变的）
+     * @param ratio 缩放比例（例如 1.1 是在原有的基础上缩放 1.1 倍）
+     */
+    scaleSystem(scaleOrigin: Vector2, ratio: number) {
+        if (this.scalable) {
+            const { origin, afterScaleCallBack } = this;
+
+            this.scale *= ratio;
+
+            this.origin = scaleOrigin.add(origin.sub(scaleOrigin).multiply(ratio));
+
+            if (afterScaleCallBack) {
+                afterScaleCallBack();
+            }
+        }
+
+    }
 }
 
 export {
