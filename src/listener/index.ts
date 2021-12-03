@@ -80,9 +80,9 @@ class DOMListener {
     private trigger(type: InteractiveType, event: BaseEvent) {
         // TODO throttle
         this.interactions.forEach(interaction => {
-            const data = interaction.normalizeEvent(event);
-            interaction.triggerEvent(type, data);
-        })
+            const payload = interaction.handleEventPayload ? interaction.handleEventPayload(event) : event;
+            interaction.triggerEvent(type, payload);
+        });
     }
 
     /**

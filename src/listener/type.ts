@@ -38,13 +38,13 @@ export enum InteractiveType {
 
 export type BaseEvent = PointerEvent | KeyboardEvent | WheelEvent;
 
-export interface BaseInteraction<E = BaseEvent> {
+export interface BaseInteraction<P = BaseEvent> {
     /**
-     * 对原始事件对象 event 进行处理
+     * 对 Event 的预处理，处理为 triggerEvent 接口所需要的 payload 类型
      */
-    normalizeEvent(e: BaseEvent): E;
+    handleEventPayload?: (e: BaseEvent) => P;
     /**
-     * 出发交互器的交互事件 
+     * 触发交互器的交互事件 
      */
-    triggerEvent(type: InteractiveType, e: E): void;
+    triggerEvent(type: InteractiveType, payload: P): void;
 }
