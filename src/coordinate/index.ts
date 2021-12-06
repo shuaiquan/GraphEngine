@@ -1,5 +1,5 @@
 import { Vector2 } from "@s7n/math";
-import { CoordinateSystemOptions } from "./type";
+import { CoordinateSystemInitOption, CoordinateSystemOptions } from "./type";
 
 const DEFAULT_OPTION: CoordinateSystemOptions = {
     origin: new Vector2(0, 0),
@@ -9,11 +9,6 @@ const DEFAULT_OPTION: CoordinateSystemOptions = {
 }
 
 class CoordinateSystem {
-    /**
-     * 画布对象
-     */
-    private canvas: HTMLCanvasElement;
-
     /**
      * 坐标系的原点
      * 
@@ -46,9 +41,7 @@ class CoordinateSystem {
      */
     private afterScaleCallBack?: () => void;
 
-    constructor(canvas: HTMLCanvasElement, options?: CoordinateSystemOptions) {
-        this.canvas = canvas;
-
+    constructor(options?: CoordinateSystemOptions) {
         const { origin, draggable, afterDragCallBack, scale, scalable, afterScaleCallBack } = Object.assign({}, DEFAULT_OPTION, options);
         this.origin = origin.clone();
         this.scale = scale;
@@ -56,6 +49,26 @@ class CoordinateSystem {
         this.scalable = scalable;
         this.afterDragCallBack = afterDragCallBack;
         this.afterScaleCallBack = afterScaleCallBack;
+    }
+
+    /**
+     * 通过画布尺寸和场景尺寸初始化坐标系
+     * @param option 适配数据
+     */
+    init(option: CoordinateSystemInitOption) {
+        const { width, height, widthRange, heightRange } = option;
+
+        // 计算场景的缩放
+        const scaleW = width / (Math.abs(widthRange[1] - widthRange[0]) || width);
+        const scaleH = height / (Math.abs(heightRange[1] - heightRange[0]) || height);
+        this.scale = Math.min(scaleW, scaleH);
+
+        // 计算场景原点所处画布的位置
+        const x = Math.min(widthRange[1], widthRange[0]);
+        const y = Math.min(heightRange[1], heightRange[0]);
+        this.origin = (new Vector2(-x, -y)).multiply(this.scale);
+
+        return this;
     }
 
     /**

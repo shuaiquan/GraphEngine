@@ -1,3 +1,4 @@
+import { CoordinateSystem } from '../coordinate';
 import { Object2D } from '../object';
 import { Renderer } from '../renderer';
 import { StyleOption } from '../shape';
@@ -11,6 +12,11 @@ class Canvas2D {
     private renderer: Renderer;
 
     /**
+     * 场景坐标系
+     */
+    private coordinateSystem: CoordinateSystem;
+
+    /**
      * 被渲染的目标画布
      */
     private element: HTMLCanvasElement;
@@ -21,8 +27,11 @@ class Canvas2D {
     private viewPort: Object2D = new Object2D();
 
     constructor(option: CanvasOption = {}) {
+        // 初始化画布
         this.element = this.createCanvas(option);
-
+        // 初始化坐标系
+        this.coordinateSystem = this.adaptCoordinateSystem(this.element, option);
+        // 初始化渲染器
         this.renderer = new Renderer(this.element, option.autoRender);
     }
 
@@ -69,7 +78,7 @@ class Canvas2D {
         const { element, width, height } = option;
 
         let canvas = typeof element === 'string' ? document.getElementById(element) as HTMLCanvasElement : element;
-        if (canvas && canvas.tagName !== 'CANVAS') {
+        if (canvas && canvas.tagName === 'CANVAS') {
             // 用户传入了有效的画布DOM，仅可以根据用户传入的宽高进行设置
             return (
                 width && canvas.setAttribute('width', `${width}`),
@@ -83,6 +92,22 @@ class Canvas2D {
         canvas.setAttribute('width', `${width || DEFAULT_CANVAS_OPTION.width}`);
         canvas.setAttribute('height', `${height || DEFAULT_CANVAS_OPTION.height}`);
         return canvas;
+    }
+
+    /**
+     * 将场景坐标系适配画布
+     */
+    private adaptCoordinateSystem(canvas: HTMLCanvasElement, option: CanvasOption) {
+        const { width, height } = canvas.getBoundingClientRect();
+        const { sceneWidthRange = [0, width], sceneHeightRange = [0, height] } = option;
+
+        const widthRange = typeof sceneWidthRange === 'number' ? [0, sceneWidthRange] : sceneWidthRange;
+        const heightRange = typeof sceneHeightRange === 'number' ? [0, sceneHeightRange] : sceneHeightRange;
+
+        const coordinateSystem = new CoordinateSystem();
+        return coordinateSystem.init({
+            width, height, widthRange, heightRange
+        });
     }
 }
 

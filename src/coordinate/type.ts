@@ -32,3 +32,22 @@ export interface CoordinateSystemOptions {
      */
     afterScaleCallBack?: () => void;
 }
+
+export interface CoordinateSystemInitOption {
+    /**
+     * 画布的物理宽度
+     */
+    width: number;
+    /**
+     * 画布的物理高度
+     */
+    height: number;
+    /**
+     * 场景显示的宽度范围
+     */
+    widthRange: number[];
+    /**
+     * 场景显示的高度范围
+     */
+    heightRange: number[];
+}
