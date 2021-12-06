@@ -39,7 +39,7 @@ export enum EventCoorType {
  * @param event PointerEvent
  * @param type 事件的中何种坐标：Screen、Client、Page、Offset
  */
-export function getCoorFromEvent(event: PointerEvent, type: EventCoorType = EventCoorType.Offset) {
+export function getCoorFromEvent(event: PointerEvent | WheelEvent, type: EventCoorType = EventCoorType.Offset) {
     switch (type) {
         case EventCoorType.Screen: {
             const { screenX: x, screenY: y } = event;
