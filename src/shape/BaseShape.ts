@@ -1,7 +1,7 @@
-import { Object2D } from "../object";
+import { Group } from "../entity";
 import { StyleOption } from './style';
 
-abstract class BaseShape extends Object2D {
+abstract class BaseShape extends Group {
     /**
      * 样式配置
      */
