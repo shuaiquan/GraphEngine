@@ -1,5 +1,5 @@
 import { CoordinateSystem } from '../coordinate';
-import { Object2D } from '../object';
+import { Entity2D, RenderTree } from '../entity';
 import { Renderer } from '../renderer';
 import { StyleOption } from '../shape';
 import { DEFAULT_CANVAS_OPTION } from './const';
@@ -22,9 +22,11 @@ class Canvas2D {
     private element: HTMLCanvasElement;
 
     /**
-     * 默认视口：当前要渲染的全部元素都会被添加这个视口下
+     * 渲染模型树
+     * 
+     * @description 组织场景下要被渲染的全部实体
      */
-    private viewPort: Object2D = new Object2D();
+    private renderTree: RenderTree = new RenderTree();
 
     constructor(option: CanvasOption = {}) {
         // 初始化画布
@@ -46,8 +48,8 @@ class Canvas2D {
      * 增加要渲染的元素
      * @param child 目标元素
      */
-    add(child: Object2D | Object2D[]) {
-        this.viewPort.addChild(child);
+    addEntity(entity: Entity2D | Entity2D[]) {
+        this.renderTree.addChild(entity);
         return this;
     }
 
@@ -55,8 +57,8 @@ class Canvas2D {
      * 移除要渲染的元素
      * @param child 目标元素
      */
-    remove(child: Object2D | Object2D[]) {
-        this.viewPort.removeChild(child);
+    removeEntity(entity: Entity2D | Entity2D[]) {
+        this.renderTree.addChild(entity);
         return this;
     }
 

@@ -1,5 +1,5 @@
-import { Object2D } from "../object";
-import { render } from "./render";
+import { RenderTree } from "../entity";
+import { CanvasRenderer } from "./canvas-renderer";
 
 /**
  * 渲染器：负责将 Canvas 传递来的数据进行渲染
@@ -11,14 +11,16 @@ class Renderer {
     private dom: HTMLCanvasElement;
 
     /**
-     * 画布 2D Context
+     * 使用 Canvas2D 的渲染器
+     * 
+     * @todo 将来有多种渲染器的情况时，不会这样写死
      */
-    private ctx: CanvasRenderingContext2D;
+    private canvasRenderer: CanvasRenderer;
 
     /**
      * 要被渲染的视口
      */
-    private viewport?: Object2D;
+    private renderTree?: RenderTree;
 
     /**
      * 是否开启自动渲染
@@ -32,18 +34,18 @@ class Renderer {
 
     constructor(dom: HTMLCanvasElement, autoRender: boolean = false) {
         this.dom = dom;
-        this.ctx = dom.getContext('2d');
+        this.canvasRenderer = new CanvasRenderer(this.dom);
         if (autoRender) {
             this.tick();
         }
     }
 
     /**
-     * 渲染
-     * @param viewport 
+     * 渲染场景
+     * @param  
      */
-    render(viewport: Object2D) {
-        this.viewport = viewport;
+    render(renderTree: RenderTree) {
+        this.renderTree = renderTree
         this.renderViewport();
     }
 
@@ -69,8 +71,9 @@ class Renderer {
      * 渲染当前视口
      */
     private renderViewport() {
-        if (this.viewport) {
-            render(this.viewport, this.ctx);
+        if (this.renderTree) {
+            const entities = this.renderTree.getAllEntities();
+            entities.forEach(entity => this.canvasRenderer.render(entity));
         }
     }
 
