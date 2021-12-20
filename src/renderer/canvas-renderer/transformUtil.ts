@@ -1,3 +1,4 @@
+import { Matrix3 } from "@s7n/math";
 import { Transform } from "../../entity";
 
 /**
@@ -29,5 +30,14 @@ export function getContextTransform(transform: Transform) {
     const e = translate.x;
     const f = translate.y;
 
-    return [a, b, c, d, e, f];
+    return { a, b, c, d, e, f };
+}
+
+/**
+ * 将 Matrix 数据转换 context 的 Transform
+ * @param matrix 矩阵
+ */
+export function getTransformFromMatrix3(matrix: Matrix3) {
+    const [a, c, e, b, d, f] = matrix.toArray();
+    return { a, b, c, d, e, f };
 }

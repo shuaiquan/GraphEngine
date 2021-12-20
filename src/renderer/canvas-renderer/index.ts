@@ -2,6 +2,7 @@ import { Entity2D } from "../../entity";
 import { BaseShape } from "../../shape";
 import { getShapePath } from "./shapePath";
 import { getFillAlpha, getShapeStyleOption, getStrokeAlpha, hasFillStyle, hasStrokeStyle } from "./styleUtil";
+import { getTransformFromMatrix3 } from "./transformUtil";
 
 /**
  * 使用 Canvas 2D 绘制的渲染器
@@ -41,6 +42,9 @@ class CanvasRenderer {
             ctx.save();     // todo 需不需要
 
             const path = getShapePath(shape);
+
+            // const preTransform = ctx.getTransform();     // ctx.restore 包括这个吗
+            ctx.setTransform(getTransformFromMatrix3(shape.getWorldMatrix()));
 
             if (shouldStroke) {
                 const { lineCap, lineJoin, miterLimit, lineWidth, lineDash, lineDashOffset, strokeStyle } = styleOption;

@@ -3,16 +3,43 @@ import { Transform } from "../transform";
 
 class Entity2D extends EntityEmitter {
     /**
+     * 模型实体的父节点
+     */
+    parent?: Entity2D;
+
+    /**
      * 模型实体的变换
      */
-    transform: Transform;
+    transform: Transform = new Transform();
 
     /**
      * Z 方向的层级，层级高的会覆盖层级低的实体
      * 
-     * @default 0
+     * 默认: 0
      */
     zIndex: number = 0;
+
+    /**
+     * 获取模型实体的局部坐标系变换
+     * @returns 
+     */
+    getLocalMatrix() {
+        return this.transform.getMatrix();
+    }
+
+    /**
+     * 获取模型实体的全局坐标变换
+     * @returns 
+     */
+    getWorldMatrix() {
+        let matrix = this.getLocalMatrix();
+        let parent = this.parent;
+        while (parent) {
+            matrix = parent.getLocalMatrix().preMultiply(matrix);
+            parent = parent.parent;
+        }
+        return matrix;
+    }
 }
 
 export {

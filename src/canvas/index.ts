@@ -66,7 +66,7 @@ class Canvas2D {
      * 渲染画布
      */
     render() {
-        this.renderer.render(this.viewPort);
+        this.renderer.render(this.renderTree);
     }
 
     setGlobalStyleOption(styleOption: StyleOption) {

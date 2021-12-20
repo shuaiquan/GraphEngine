@@ -1,4 +1,4 @@
-import { Vector2 } from "@s7n/math";
+import { Matrix3, Vector2 } from "@s7n/math";
 
 /**
  * 变换数据
@@ -9,23 +9,33 @@ class Transform {
     /**
      * 平移
      * 
-     * @default (0, 0)
+     * 默认: Vector2(0, 0)
      */
     translate: Vector2 = new Vector2(0, 0);
 
     /**
      * 缩放
      * 
-     * @default (1, 1)
+     * 默认: Vector2(1, 1)
      */
     scale: Vector2 = new Vector2(1, 1);
 
     /**
      * 旋转
      * 
-     * @default 0 (弧度)
+     * 默认: 0 (弧度)
      */
     rotate: number = 0;
+
+    /**
+     * 获取变换合成的矩阵
+     * @returns Matrix3
+     */
+    getMatrix() {
+        const { translate, scale, rotate } = this;
+
+        return (new Matrix3()).applyRotate(rotate).applyScale(scale).applyTranslate(translate);
+    }
 }
 
 export {
