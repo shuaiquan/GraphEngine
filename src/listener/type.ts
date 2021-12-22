@@ -38,6 +38,8 @@ export enum InteractiveType {
 
 export type BaseEvent = PointerEvent | KeyboardEvent | WheelEvent;
 
+export type EventType<T extends InteractiveType> = T extends InteractiveType.Wheel ? WheelEvent : PointerEvent;
+
 export interface BaseInteraction<P = BaseEvent> {
     /**
      * 对 Event 的预处理，处理为 triggerEvent 接口所需要的 payload 类型

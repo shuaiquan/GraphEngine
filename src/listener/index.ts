@@ -1,5 +1,5 @@
 import { IVec2 } from "@s7n/math";
-import { BaseEvent, BaseInteraction, InteractiveType } from "./type";
+import { BaseEvent, BaseInteraction, InteractiveType, EventType } from "./type";
 import { EventCoorType, getCoorFromEvent } from "./utils";
 
 /**
@@ -209,4 +209,5 @@ export {
     InteractiveType,
     BaseEvent,
     BaseInteraction,
+    EventType,
 };

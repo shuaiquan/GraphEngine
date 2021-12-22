@@ -1,16 +1,5 @@
-import { InteractiveType } from "../../listener";
-
-type Listener = (...arg: any[]) => void;
-
-class EventObject {
-    fn: Listener;
-    once: boolean;
-
-    constructor(fn: Listener, once: boolean) {
-        this.fn = fn;
-        this.once = once;
-    }
-}
+import { InteractiveType, EventType } from "../../listener";
+import { Listener, ListenerData } from './type';
 
 /**
  * 模型实体事件管理器
@@ -19,7 +8,7 @@ class EntityEmitter {
     /**
      * 交互事件对应处理函数
      */
-    private eventMap: Map<InteractiveType, EventObject[]> = new Map();
+    private eventMap: Map<InteractiveType, ListenerData[]> = new Map();
 
     /**
      * 注册交互事件
@@ -27,7 +16,7 @@ class EntityEmitter {
      * @param listener 回调函数
      * @param once 是否只触发一次（默认：false）
      */
-    private addEventListener(type: InteractiveType, listener: Listener, once: boolean = false) {
+    private addEventListener<T extends InteractiveType>(type: T, listener: Listener<T>, once: boolean = false) {
         if (!(listener instanceof Function)) {
             throw new Error('listener must be a function');
         }
@@ -37,7 +26,7 @@ class EntityEmitter {
         }
 
         const listeners = this.eventMap.get(type);
-        listeners.push(new EventObject(listener, once));
+        listeners.push(new ListenerData(listener, once));
     }
 
     /**
@@ -45,7 +34,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数（可选，不传时会取消该交互事件下的所有回调函数）
      */
-    private removeEventListener(type: InteractiveType, listener?: Listener) {
+    private removeEventListener<T extends InteractiveType>(type: T, listener?: Listener<T>) {
         if (!this.eventMap.has(type)) {
             return this;
         }
@@ -71,7 +60,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数
      */
-    on(type: InteractiveType, listener: Listener) {
+    on<T extends InteractiveType>(type: T, listener: Listener<T>) {
         this.addEventListener(type, listener, false);
         return this;
     }
@@ -82,7 +71,7 @@ class EntityEmitter {
      * @param listener 回调函数
      * @returns 
      */
-    once(type: InteractiveType, listener: Listener) {
+    once<T extends InteractiveType>(type: T, listener: Listener<T>) {
         this.addEventListener(type, listener, true);
         return this;
     }
@@ -92,7 +81,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数
      */
-    off(type: InteractiveType, listener: Listener) {
+    off<T extends InteractiveType>(type: InteractiveType, listener: Listener<T>) {
         this.removeEventListener(type, listener);
         return this;
     }
@@ -110,7 +99,7 @@ class EntityEmitter {
      * 触发交互事件
      * @param type 交互类型
      */
-    emit(type: InteractiveType) {
+    emit<T extends InteractiveType>(type: T, event: EventType<T>) {
         if (!this.eventMap.has(type)) {
             return this;
         }
@@ -119,7 +108,7 @@ class EntityEmitter {
         for (let i = 0; i < listeners.length;) {
             const obj = listeners[i];
 
-            obj.fn();
+            obj.fn(event);
 
             if (obj.once) {
                 listeners.splice(i, 1);
