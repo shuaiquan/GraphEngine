@@ -20,6 +20,13 @@ class Entity2D extends EntityEmitter {
     zIndex: number = 0;
 
     /**
+     * 实体是否可见。不可见的实体连同子树会一起被移除渲染
+     * 
+     * 默认：true
+     */
+    visible: boolean = true;
+
+    /**
      * 获取模型实体的局部坐标系变换
      * @returns 
      */

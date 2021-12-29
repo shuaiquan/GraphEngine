@@ -72,7 +72,7 @@ class Renderer {
      */
     private renderViewport() {
         if (this.renderTree) {
-            const entities = this.renderTree.getAllEntities();
+            const entities = this.renderTree.flattenTree();
             entities.forEach(entity => this.canvasRenderer.render(entity));
         }
     }
