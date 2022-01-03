@@ -36,7 +36,9 @@ export enum InteractiveType {
     Wheel,
 }
 
-export type BaseEvent = PointerEvent | KeyboardEvent | WheelEvent;
+// export type BaseEvent = PointerEvent | KeyboardEvent | WheelEvent;
+export type BaseEvent = PointerEvent | WheelEvent;
+
 
 export type EventType<T extends InteractiveType> = T extends InteractiveType.Wheel ? WheelEvent : PointerEvent;
 

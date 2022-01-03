@@ -38,6 +38,6 @@
     "webpack-dev-server": "^4.4.0"
   },
   "dependencies": {
-    "@s7n/math": "0.0.4"
+    "@s7n/math": "^0.0.7"
   }
 }
