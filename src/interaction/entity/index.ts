@@ -12,6 +12,10 @@ import { hitEntityTest } from "./hitEntityTest";
 class EntityInteraction implements BaseInteraction {
     private renderTree: RenderTree;
 
+    constructor(renderTree: RenderTree) {
+        this.renderTree = renderTree;
+    }
+
     triggerEvent(type: InteractiveType, payload: BaseEvent) {
         const { x, y } = getCoorFromEvent(payload);
         // 对渲染树惊醒碰撞检测，找到目标实体

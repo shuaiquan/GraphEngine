@@ -1,5 +1,7 @@
 import { CoordinateSystem } from '../coordinate';
 import { Entity2D, RenderTree } from '../entity';
+import { EntityInteraction } from '../interaction';
+import { DOMListener } from '../listener';
 import { Renderer } from '../renderer';
 import { StyleOption } from '../shape';
 import { DEFAULT_CANVAS_OPTION } from './const';
@@ -28,6 +30,8 @@ class Canvas2D {
      */
     private renderTree: RenderTree = new RenderTree();
 
+    private domListener: DOMListener;
+
     constructor(option: CanvasOption = {}) {
         // 初始化画布
         this.element = this.createCanvas(option);
@@ -35,6 +39,9 @@ class Canvas2D {
         this.coordinateSystem = this.adaptCoordinateSystem(this.element, option);
         // 初始化渲染器
         this.renderer = new Renderer(this.element, option.autoRender);
+        // 初始化事件监听
+        this.domListener = new DOMListener(this.element);
+        this.domListener.registerInteraction(new EntityInteraction(this.renderTree));
     }
 
     /**
