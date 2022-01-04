@@ -1,9 +1,40 @@
+import { BaseShape } from "../shape";
 import { Entity2D } from "./entity-2d";
+import { Group } from "./group";
+import { RenderTree } from "./render-tree";
 
 /**
  * 实体模型处理工具函数
  */
 abstract class EntityUtil {
+    /**
+     * 是否是模型实体
+     */
+    static isEntity2D(value: any): value is Entity2D {
+        return value instanceof Entity2D;
+    }
+
+    /**
+     * 是否是 Group
+     */
+    static isGroup(value: any): value is Group {
+        return value instanceof Group;
+    }
+
+    /**
+     * 是否是图形实体
+     */
+    static isShapeEntity(value: any): value is BaseShape {
+        return value instanceof BaseShape;
+    }
+
+    /**
+     * 是否是 RenderTree
+     */
+    static isRenderTree(value: any): value is RenderTree {
+        return value instanceof RenderTree;
+    }
+
     /**
      * 将实体按照 zIndex 进行排序
      * @param children 需要排序的实体数组

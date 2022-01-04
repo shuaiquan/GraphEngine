@@ -1,6 +1,6 @@
 import * as M from "@s7n/math";
-import { Entity2D, Group, RenderTree } from "../../entity";
-import { Arc, BaseShape, BezierCurve, Circle, Ellipse, Line, Polygon, Rect, Sector } from "../../shape";
+import { Entity2D, EntityUtil } from "../../entity";
+import { ShapeEntityUtil } from "../../shape";
 
 /**
  * 对模型实体进行碰撞检测
@@ -8,9 +8,9 @@ import { Arc, BaseShape, BezierCurve, Circle, Ellipse, Line, Polygon, Rect, Sect
  * @param point 碰撞点
  */
 export function hitEntityTest(entity: Entity2D, point: M.Vector2) {
-    if (entity instanceof BaseShape) {
+    if (EntityUtil.isShapeEntity(entity)) {
         return hitShapeTest(entity, point);
-    } else if (entity instanceof RenderTree) {
+    } else if (EntityUtil.isRenderTree(entity)) {
         return true;
     }
     return false;
@@ -23,29 +23,44 @@ export function hitEntityTest(entity: Entity2D, point: M.Vector2) {
  */
 function hitShapeTest(entity: Entity2D, point: M.Vector2) {
     // todo 考虑 shape 的 stroke 粗细
-    if (entity instanceof Arc) {
+    if (ShapeEntityUtil.isArc(entity)) {
+
         const mArc = new M.Arc(entity.getCenter(), entity.radius, entity.startAngle, entity.endAngle, entity.counterclockwise);
         return mArc.isPointOnArc(point);
-    } else if (entity instanceof BezierCurve) {
+
+    } else if (ShapeEntityUtil.isBezierCurve(entity)) {
+
         // TODO 支持在贝塞尔曲线上的判断
         return false;
-    } else if (entity instanceof Circle) {
+
+    } else if (ShapeEntityUtil.isCircle(entity)) {
+
         const mCircle = new M.Circle(entity.getCenter(), entity.radius);
         return mCircle.isPointInsideCircle(point, true);
-    } else if (entity instanceof Ellipse) {
+
+    } else if (ShapeEntityUtil.isEllipse(entity)) {
+
         const mEllipse = new M.Ellipse(entity.getCenter(), entity.radiusX, entity.radiusY, entity.rotation);
         return mEllipse.isPointInsideEllipse(point);
-    } else if (entity instanceof Line) {
+
+    } else if (ShapeEntityUtil.isLine(entity)) {
+
         const mLine = new M.Line2().setStart(entity.getStart()).setEnd(entity.getEnd());
         return mLine.isPointOnSegment(point);
-    } else if (entity instanceof Polygon) {
+
+    } else if (ShapeEntityUtil.isPolygon(entity)) {
+
         const mPolygon = new M.Polygon(entity.getPathData());
         return mPolygon.isPointInsidePolygon(point);
-    } else if (entity instanceof Rect) {
+
+    } else if (ShapeEntityUtil.isRect(entity)) {
+
         const { x, y, width, height } = entity;
         const mRect = M.Box2.createByGeometry(new M.Vector2(x + width / 2, y + height / 2), new M.Vector2(width, height));
         return mRect.isPointInBox(point);
-    } else if (entity instanceof Sector) {
+
+    } else if (ShapeEntityUtil.isSector(entity)) {
+
         const mArc = new M.Arc(entity.getCenter(), entity.radius, entity.startAngle, entity.endAngle, entity.counterclockwise);
         return mArc.isPointInsideArc(point);
     }

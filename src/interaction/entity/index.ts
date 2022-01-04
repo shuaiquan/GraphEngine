@@ -1,5 +1,5 @@
 import { Vector2 } from "@s7n/math";
-import { Entity2D, EntityUtil, Group, RenderTree } from "../../entity";
+import { Entity2D, EntityUtil, RenderTree } from "../../entity";
 import { BaseEvent, BaseInteraction, InteractiveType } from "../../listener";
 import { getCoorFromEvent } from "../../listener/utils";
 import { hitEntityTest } from "./hitEntityTest";
@@ -54,7 +54,7 @@ class EntityInteraction implements BaseInteraction {
 
         if (hitted) {
             // step 3 被命中的情况，要优先考虑是不是命中的子孙代实体
-            if (entity instanceof Group) {  // todo 将这些类型判断语义化到 EntityUtil 中实现
+            if (EntityUtil.isGroup(entity)) {
                 const children = EntityUtil.sortByZIndex(entity.children, false);
                 const hittedChild = children.find(child => this.hitTest(child, localPoint));
 
