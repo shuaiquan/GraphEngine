@@ -110,7 +110,7 @@ class DOMListener {
     /**
      * PointerDown 事件回调函数
      */
-    private onPointerDown(event: PointerEvent) {
+    private onPointerDown = (event: PointerEvent) => {
         // 注册 Up 事件
         document.addEventListener('pointerup', this.onPointerUp);
         // 标记鼠标处于按下状态
@@ -124,7 +124,7 @@ class DOMListener {
     /**
      * PointerMove 事件回调函数
      */
-    private onPointerMove(event: PointerEvent) {
+    private onPointerMove = (event: PointerEvent) => {
         if (this.isPressing) {
             if (this.isDragging) {
                 this.trigger(InteractiveType.DragMove, event);
@@ -142,7 +142,7 @@ class DOMListener {
     /**
      * PointerUp 事件回调函数
      */
-    private onPointerUp(event: PointerEvent) {
+    private onPointerUp = (event: PointerEvent) => {
         // Up 事件可能触发在 DOM 外，找到在 DOM 内的最后有效位置
         const validEvent = this.getValidEventOnUp(event);
 
@@ -161,21 +161,21 @@ class DOMListener {
     /**
      * DblClick 事件回调函数
      */
-    private onDblClick(event: PointerEvent) {
+    private onDblClick = (event: PointerEvent) => {
         this.trigger(InteractiveType.DBClick, event);
     }
 
     /**
      * ContextMenu 事件回调函数
      */
-    private onContextMene(event: PointerEvent) {
+    private onContextMene = (event: PointerEvent) => {
         this.trigger(InteractiveType.RightClick, event);
     }
 
     /**
      * Wheel 事件回调函数
      */
-    private onWheel(event: WheelEvent) {
+    private onWheel = (event: WheelEvent) => {
         this.trigger(InteractiveType.Wheel, event);
     }
 
