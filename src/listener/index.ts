@@ -169,6 +169,8 @@ class DOMListener {
      * ContextMenu 事件回调函数
      */
     private onContextMene = (event: PointerEvent) => {
+        // 对于 ContextMenu 事件，这里默认就关闭了浏览器的默认行为
+        event.preventDefault();     // TODO 考虑这一权限是否交给开发者
         this.trigger(InteractiveType.RightClick, event);
     }
 
