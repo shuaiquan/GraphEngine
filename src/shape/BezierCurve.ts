@@ -1,19 +1,46 @@
 import { IVec2, Vector2 } from "@s7n/math";
+import { BaseShape } from "./BaseShape";
+import { StyleOption } from "./style";
 
 /**
  * 二次或三次贝塞尔曲线
  */
-class BezierCurve {
+class BezierCurve extends BaseShape {
+    /**
+     * 起点
+     */
     private startPoint: Vector2 = new Vector2();
 
+    /**
+     * 终点
+     */
     private endPoint: Vector2 = new Vector2();
 
+    /**
+     * 控制点1
+     */
     private cp1: Vector2 = new Vector2();
 
+    /**
+     * 控制点2
+     */
     private cp2?: Vector2;
 
-    constructor() {
-
+    /**
+     * 
+     * @param startPoint 起点
+     * @param endPoint 终点
+     * @param cp1 控制点1
+     * @param cp2 控制点2（可选）
+     */
+    constructor(startPoint: Vector2, endPoint: Vector2, cp1: Vector2, cp2?: Vector2, styleOption?: StyleOption) {
+        super(styleOption);
+        this.startPoint = startPoint.clone();
+        this.endPoint = endPoint.clone();
+        this.cp1 = cp1.clone();
+        if (cp2) {
+            this.cp2 = cp2.clone();
+        }
     }
 
     /**
