@@ -1,7 +1,7 @@
 /**
  * 交互管理器可以注册监听的交互类型（交互事件）
  */
-export enum InteractiveType {
+export enum InteractionType {
     /**
      * 点击事件
      */
@@ -39,8 +39,9 @@ export enum InteractiveType {
 // export type BaseEvent = PointerEvent | KeyboardEvent | WheelEvent;
 export type BaseEvent = PointerEvent | WheelEvent;
 
+export type DOMEvent = PointerEvent | WheelEvent;
 
-export type EventType<T extends InteractiveType> = T extends InteractiveType.Wheel ? WheelEvent : PointerEvent;
+export type EventType<T extends InteractionType> = T extends InteractionType.Wheel ? WheelEvent : PointerEvent;
 
 export interface BaseInteraction<P = BaseEvent> {
     /**
@@ -50,5 +51,5 @@ export interface BaseInteraction<P = BaseEvent> {
     /**
      * 触发交互器的交互事件 
      */
-    triggerEvent(type: InteractiveType, payload: P): void;
+    triggerEvent(type: InteractionType, payload: P): void;
 }
