@@ -16,7 +16,7 @@ class Canvas2D {
     /**
      * 场景坐标系
      */
-    private coordinateSystem: CoordinateSystem;
+    // private coordinateSystem: CoordinateSystem;
 
     /**
      * 被渲染的目标画布
@@ -35,8 +35,8 @@ class Canvas2D {
     constructor(option: CanvasOption = {}) {
         // 初始化画布
         this.element = this.createCanvas(option);
-        // 初始化坐标系
-        this.coordinateSystem = this.adaptCoordinateSystem(this.element, option);
+        // 适配场景
+        this.adaptCoordinateSystem(this.element, option);
         // 初始化渲染器
         this.renderer = new Renderer(this.element, option.autoRender);
         // 初始化事件监听
@@ -113,10 +113,12 @@ class Canvas2D {
         const widthRange = typeof sceneWidthRange === 'number' ? [0, sceneWidthRange] : sceneWidthRange;
         const heightRange = typeof sceneHeightRange === 'number' ? [0, sceneHeightRange] : sceneHeightRange;
 
-        const coordinateSystem = new CoordinateSystem();
-        return coordinateSystem.init({
-            width, height, widthRange, heightRange
-        });
+        this.renderTree.fitView({ width, height, widthRange, heightRange });
+
+        // const coordinateSystem = new CoordinateSystem();
+        // return coordinateSystem.init({
+        //     width, height, widthRange, heightRange
+        // });
     }
 }
 
