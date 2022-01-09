@@ -9,6 +9,17 @@ class InteractionEvent {
     }
 
     /**
+     * 拷贝 InteractionEvent 的基本信息
+     */
+    static clone(event: InteractionEvent) {
+        const { type, originalEvent, originalEntity, scenePoint } = event;
+        const e = new InteractionEvent(originalEvent, type);
+        e.originalEntity = originalEntity;
+        e.scenePoint = scenePoint;
+        return e;
+    }
+
+    /**
      * 交互类型
      */
     type: InteractionType;

@@ -1,15 +1,3 @@
-
-// export interface BaseInteraction<P = BaseEvent> {
-//     /**
-//      * 对 Event 的预处理，处理为 triggerEvent 接口所需要的 payload 类型
-//      */
-//     handleEventPayload?: (e: BaseEvent) => P;
-//     /**
-//      * 触发交互器的交互事件 
-//      */
-//     triggerEvent(type: InteractiveType, payload: P): void;
-// }
-
 import { Vector2 } from "@s7n/math";
 import { Entity2D, RenderTree } from "../entity";
 import { InteractionEvent } from "./InteractionEvent";
@@ -66,6 +54,7 @@ abstract class BaseInteraction {
         const matrix = this.renderTree.getLocalMatrix().invert();
         // 设置 event 上的场景坐标
         event.scenePoint = event.canvasPoint.applyMatrix3(matrix);
+        return this;
     }
 
     /**
