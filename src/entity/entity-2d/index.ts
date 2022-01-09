@@ -1,4 +1,4 @@
-import { EntityEmitter } from "../event-emitter";
+import { EntityEmitter } from "../entity-emitter";
 import { Transform } from "../transform";
 
 class Entity2D extends EntityEmitter {

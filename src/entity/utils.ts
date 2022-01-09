@@ -42,7 +42,11 @@ abstract class EntityUtil {
      * @returns 排序后的实体数组
      */
     static sortByZIndex(children: Entity2D[], minFirst: boolean = true) {
-        return [...children].sort((a, b) => minFirst ? a.zIndex - b.zIndex : b.zIndex - a.zIndex);
+        if (minFirst) {
+            return [...children].sort((a, b) => a.zIndex - b.zIndex);
+        }
+        // 按照 zIndex 从大到小，还需要注意的是 children 本身 zIndex 相同的情况下，后添加的会高于先添加的
+        return [...children].reverse().sort((a, b) => b.zIndex - a.zIndex);
     }
 
     /**
