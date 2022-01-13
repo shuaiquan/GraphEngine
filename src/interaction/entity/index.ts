@@ -1,4 +1,5 @@
 import { Vector2 } from "@s7n/math";
+import { Command } from "../../command";
 import { Entity2D, EntityUtil } from "../../entity";
 import { BaseInteraction, InteractionEvent, InteractionType } from "../../listener";
 import { hitEntityTest } from "./hitEntityTest";
@@ -20,11 +21,28 @@ interface HittedPath {
  * 目标就是要将这些事件转发到 Entity 身上
  */
 class EntityInteraction extends BaseInteraction {
+    /**
+     * 指令集
+     */
+    private commands: Command[] = [];
+
     triggerEvent(type: InteractionType, event: InteractionEvent) {
         // 对渲染树进行碰撞检测，找到碰撞路径
         const hittedPath = this.hitTestPath(this.renderTree, event.canvasPoint);
         // 对碰撞路径上的每个节点触发事件（模拟冒泡）
         this.bubbleOnHittedPath(hittedPath, type, event);
+    }
+
+    /**
+     * 注册指令
+     * @param command 指令
+     */
+    registerCommand(command: Command | Command[]) {
+        if (Array.isArray(command)) {
+            this.commands.push(...command);
+        } else {
+            this.commands.push(command);
+        }
     }
 
     // private hitTest(entity: Entity2D, point: Vector2): Entity2D | undefined {
@@ -116,6 +134,9 @@ class EntityInteraction extends BaseInteraction {
 
             // 触发目标实体的对应事件
             entity.emit(type, currentEvent);
+
+            // 触发指令执行
+            this.commands.forEach(command => command.trigger(type, entity, event));
 
             // 如果被标记了 stopPropagation || stopImmediatePropagation 则停止冒泡
             if (currentEvent.stopPropagation || currentEvent.stopImmediatePropagation) {

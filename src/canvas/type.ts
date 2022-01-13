@@ -35,4 +35,12 @@ export interface CanvasOption {
      * 是否开启自动渲染
      */
     autoRender?: boolean;
+    /**
+     * 场景是否可缩放。默认：false
+     */
+    scalable?: boolean;
+    /**
+     * 场景是否可拖拽。默认：false
+     */
+    draggable?: boolean;
 }

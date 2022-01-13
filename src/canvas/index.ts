@@ -1,4 +1,4 @@
-import { CoordinateSystem } from '../coordinate';
+import { SceneDragCommand, SceneScaleCommand } from '../command';
 import { Entity2D, RenderTree } from '../entity';
 import { EntityInteraction } from '../interaction';
 import { DOMListener } from '../listener';
@@ -41,7 +41,9 @@ class Canvas2D {
         this.renderer = new Renderer(this.element, option.autoRender);
         // 初始化事件监听
         this.domListener = new DOMListener(this.element);
-        this.domListener.registerInteraction(new EntityInteraction(this.renderTree));
+
+        const entityInteraction = this.initEntityInteraction(option);
+        this.domListener.registerInteraction(entityInteraction);
     }
 
     /**
@@ -119,6 +121,23 @@ class Canvas2D {
         // return coordinateSystem.init({
         //     width, height, widthRange, heightRange
         // });
+    }
+
+    private initEntityInteraction(option: CanvasOption) {
+        const interaction = new EntityInteraction(this.renderTree);
+        const { draggable = false, scalable = false } = option;
+
+        if (draggable) {
+            // 根据配置, 增加场景拖拽指令
+            interaction.registerCommand(new SceneDragCommand());
+        }
+
+        if (scalable) {
+            // 根据配置, 增加场景缩放指令
+            interaction.registerCommand(new SceneScaleCommand());
+        }
+
+        return interaction;
     }
 }
 
