@@ -53,7 +53,7 @@ class RenderTree extends Group {
         const scaleW = width / (Math.abs(widthRange[1] - widthRange[0]) || width);
         const scaleH = height / (Math.abs(heightRange[1] - heightRange[0]) || height);
         const scale = Math.min(scaleW, scaleH);
-        this.transform.scale.set(scale);
+        this.transform.scale.set(scale, scale);
 
         // 计算场景原点所处画布的位置
         const x = Math.min(widthRange[1], widthRange[0]);
