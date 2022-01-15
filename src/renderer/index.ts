@@ -72,6 +72,9 @@ class Renderer {
      */
     private renderViewport() {
         if (this.renderTree) {
+            // step 1 清空画布
+            this.canvasRenderer.clearCanvas();
+            // step 2 重新渲染全部实体模型
             const entities = this.renderTree.flattenTree();
             entities.forEach(entity => this.canvasRenderer.render(entity));
         }

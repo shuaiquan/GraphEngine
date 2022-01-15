@@ -13,8 +13,22 @@ class CanvasRenderer {
      */
     private ctx: CanvasRenderingContext2D;
 
+    /**
+     * 画布的宽度
+     */
+    private width: number = 0;
+
+    /**
+     * 画布的高度
+     */
+    private height: number = 0;
+
     constructor(canvas: HTMLCanvasElement) {
         this.ctx = canvas.getContext('2d');
+
+        const { width, height } = canvas.getBoundingClientRect();
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -25,6 +39,13 @@ class CanvasRenderer {
         if (entity instanceof BaseShape) {
             this.renderShape(entity, this.ctx);
         }
+    }
+
+    /**
+     * 清空画布
+     */
+    clearCanvas() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 
     /**
