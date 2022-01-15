@@ -17,6 +17,8 @@ const RenderDemo1 = () => {
                 element: ref.current,
                 width,
                 height,
+                sceneWidthRange: 1200,
+                sceneHeightRange: 900,
             });
 
             const arc1 = new Arc(new Vector2(50, 50), 50, Math.PI / 4, Math.PI / 4 * 3, false, {

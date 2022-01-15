@@ -5,11 +5,11 @@ module.exports = {
     mode: 'development',
     devtool: 'eval-cheap-module-source-map',
     entry: {
-        demo: resolve(__dirname, './demo/app.tsx'),
+        demo: resolve(__dirname, './examples/app.tsx'),
     },
     output: {
         filename: '[name].module.js',
-        path: resolve(__dirname, './demo'),
+        publicPath: '/examples/',
     },
     module: {
         rules: [
@@ -36,15 +36,20 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Canvas2D Demo App',
+            title: 'Scene2D Examples',
             filename: 'index.html',
-            // template: resolve(__dirname, './demo/templates/index.html'),
             inject: 'body',
+            publicPath: '/examples/',
         }),
     ],
     devServer: {
         port: 4099,
-        open: ['./index.html'],
+        open: ['/examples/index.html'],
         hot: true,
+        historyApiFallback: {
+            rewrites: [
+                { from: /.*/, to: '/examples/index.html' }
+            ]
+        },   // 处理单页应用 404 问题
     }
 }

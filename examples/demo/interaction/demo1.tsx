@@ -1,7 +1,7 @@
 import { Vector2 } from '@s7n/math';
 import React, { useEffect, useRef } from 'react';
 import { Canvas2D, Circle, Rect } from '../../../src';
-import { InteractiveType } from '../../../src/listener';
+import { InteractionType } from '../../../src/listener';
 
 const InteractionDemo1 = () => {
     const ref = useRef<HTMLCanvasElement>();
@@ -37,62 +37,62 @@ const InteractionDemo1 = () => {
             // 这个类型
             /**
              * TODO
-             *  - InteractiveType 这个类型没有导出
+             *  - InteractionType 这个类型没有导出
              *  - 必须使用这个类型也很烦
              */
-            rect.on(InteractiveType.Click, () => {
+            rect.on(InteractionType.Click, () => {
                 console.log('rect Click');
             });
 
-            rect.on(InteractiveType.DBClick, () => {
+            rect.on(InteractionType.DBClick, () => {
                 console.log('rect DBClick');
             });
 
-            rect.on(InteractiveType.DragStart, () => {
+            rect.on(InteractionType.DragStart, () => {
                 console.log('rect DragStart');
             });
 
-            rect.on(InteractiveType.DragMove, () => {
+            rect.on(InteractionType.DragMove, () => {
                 console.log('rect DragMove');
             });
 
-            rect.on(InteractiveType.DragEnd, () => {
+            rect.on(InteractionType.DragEnd, () => {
                 console.log('rect DragEnd');
             });
 
-            rect.on(InteractiveType.Hover, () => {
+            rect.on(InteractionType.Hover, () => {
                 console.log('rect Hover');
             });
 
-            rect.on(InteractiveType.RightClick, () => {
+            rect.on(InteractionType.RightClick, () => {
                 console.log('rect RightClick');
             });
 
-            circle.on(InteractiveType.Click, () => {
+            circle.on(InteractionType.Click, () => {
                 console.log('circle Click');
             });
 
-            circle.on(InteractiveType.DBClick, () => {
+            circle.on(InteractionType.DBClick, () => {
                 console.log('circle DBClick');
             });
 
-            circle.on(InteractiveType.DragStart, () => {
+            circle.on(InteractionType.DragStart, () => {
                 console.log('circle DragStart');
             });
 
-            circle.on(InteractiveType.DragMove, () => {
+            circle.on(InteractionType.DragMove, () => {
                 console.log('circle DragMove');
             });
 
-            circle.on(InteractiveType.DragEnd, () => {
+            circle.on(InteractionType.DragEnd, () => {
                 console.log('circle DragEnd');
             });
 
-            circle.on(InteractiveType.Hover, () => {
+            circle.on(InteractionType.Hover, () => {
                 console.log('circle Hover');
             });
 
-            circle.on(InteractiveType.RightClick, () => {
+            circle.on(InteractionType.RightClick, () => {
                 console.log('circle RightClick');
             });
         }
