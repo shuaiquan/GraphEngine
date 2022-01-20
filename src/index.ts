@@ -10,3 +10,4 @@ export {
     Rect,
     Sector,
 } from './shape';
+export { Text } from './text';
