@@ -1,26 +1,15 @@
 import { Entity2D } from "../entity";
-
-interface TextStyle {
-    fontFamily: string | string[];
-    fontSize: number | string,
-    fontStyle: string;
-    fontWeight: string;
-    fontVariant: string;
-    fill: string;
-    stroke: string;
-    textAlign: string;
-    baseline: string;
-}
+import { CompleteTextStyle, DEFAULT_TEXT_STYLE, TextStyle } from "./style";
 
 class Text extends Entity2D {
     text: string;
 
     style: TextStyle;
 
-    constructor(text: string, style: TextStyle) {
+    constructor(text: string, style: CompleteTextStyle = {}) {
         super();
         this.text = text;
-        this.style = style;
+        this.style = Object.assign({}, DEFAULT_TEXT_STYLE, style);
     }
 }
 
