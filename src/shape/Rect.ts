@@ -22,7 +22,7 @@ class Rect extends BaseShape {
      */
     height: number = 0;
 
-    constructor(x: number, y: number, width: number, height: number, styleOption?: StyleOption) {
+    constructor(x: number, y: number, width: number, height: number, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.x = x;
         this.y = y;

@@ -13,7 +13,7 @@ class Line extends BaseShape {
      */
     private end: Vector2 = new Vector2(0, 0);
 
-    constructor(start: Vector2, end: Vector2, styleOption?: StyleOption) {
+    constructor(start: Vector2, end: Vector2, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.start = start.clone();
         this.end = end.clone();

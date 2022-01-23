@@ -13,7 +13,7 @@ class Circle extends BaseShape {
      */
     radius: number = 0;
 
-    constructor(center: Vector2, radius: number, styleOption?: StyleOption) {
+    constructor(center: Vector2, radius: number, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.center = center.clone();
         this.radius = radius;

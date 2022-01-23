@@ -13,7 +13,7 @@ class Polygon extends BaseShape {
      */
     closed: boolean = true;
 
-    constructor(data: Vector2[], styleOption?: StyleOption) {
+    constructor(data: Vector2[], styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.pathData = data;
     }

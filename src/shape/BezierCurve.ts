@@ -33,7 +33,7 @@ class BezierCurve extends BaseShape {
      * @param cp1 控制点1
      * @param cp2 控制点2（可选）
      */
-    constructor(startPoint: Vector2, endPoint: Vector2, cp1: Vector2, cp2?: Vector2, styleOption?: StyleOption) {
+    constructor(startPoint: Vector2, endPoint: Vector2, cp1: Vector2, cp2?: Vector2, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.startPoint = startPoint.clone();
         this.endPoint = endPoint.clone();

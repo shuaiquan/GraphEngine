@@ -28,7 +28,7 @@ class Sector extends BaseShape {
      */
     counterclockwise: boolean = false;
 
-    constructor(center: Vector2, radius: number, startAngle: number, endAngle: number, counterclockwise: boolean = false, styleOption?: StyleOption) {
+    constructor(center: Vector2, radius: number, startAngle: number, endAngle: number, counterclockwise: boolean = false, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.center = center.clone();
         this.radius = radius;

@@ -23,7 +23,7 @@ class Ellipse extends BaseShape {
      */
     rotation: number = 0;
 
-    constructor(center: Vector2, radiusX: number, radiusY: number, rotation: number, styleOption?: StyleOption) {
+    constructor(center: Vector2, radiusX: number, radiusY: number, rotation: number, styleOption?: Partial<StyleOption>) {
         super(styleOption);
         this.center = center.clone();
         this.radiusX = radiusX;
