@@ -1,4 +1,5 @@
 import { BaseShape } from "../shape";
+import { Text } from "../text";
 import { Entity2D } from "./entity-2d";
 import { Group } from "./group";
 import { RenderTree } from "./render-tree";
@@ -26,6 +27,13 @@ abstract class EntityUtil {
      */
     static isShapeEntity(value: any): value is BaseShape {
         return value instanceof BaseShape;
+    }
+
+    /**
+     * 是否是文本实体
+     */
+    static isTextEntity(value: any): value is Text {
+        return value instanceof Text;
     }
 
     /**

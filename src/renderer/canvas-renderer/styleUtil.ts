@@ -1,9 +1,9 @@
-import { BaseShape, CompleteStyleOption, mergeStyleOption } from "../../shape";
+import { StyleOption } from "../../shape";
 
 /**
  * 获取 stroke 的透明度
  */
-export function getStrokeAlpha(styleOption: CompleteStyleOption) {
+export function getStrokeAlpha(styleOption: StyleOption) {
     const { strokeAlpha, alpha } = styleOption;
     return strokeAlpha !== undefined ? strokeAlpha : alpha;
 }
@@ -11,7 +11,7 @@ export function getStrokeAlpha(styleOption: CompleteStyleOption) {
 /**
  * 获取 fill 的透明度
  */
-export function getFillAlpha(styleOption: CompleteStyleOption) {
+export function getFillAlpha(styleOption: StyleOption) {
     const { fillAlpha, alpha } = styleOption;
     return fillAlpha !== undefined ? fillAlpha : alpha;
 }
@@ -19,7 +19,7 @@ export function getFillAlpha(styleOption: CompleteStyleOption) {
 /**
  * 是否需要 stroke
  */
-export function hasStrokeStyle(styleOption: CompleteStyleOption) {
+export function hasStrokeStyle(styleOption: StyleOption) {
     const { strokeStyle, lineWidth } = styleOption;
     return strokeStyle && getStrokeAlpha(styleOption) > 0 && lineWidth > 0;
 }
@@ -27,16 +27,7 @@ export function hasStrokeStyle(styleOption: CompleteStyleOption) {
 /**
  * 是否需要 fill
  */
-export function hasFillStyle(styleOption: CompleteStyleOption) {
+export function hasFillStyle(styleOption: StyleOption) {
     const { fillStyle } = styleOption;
     return fillStyle && getFillAlpha(styleOption) > 0;
-}
-
-/**
- * 获取图形的完整样式配置
- * @param shape 目标图形
- * @returns styleOption
- */
-export function getShapeStyleOption(shape: BaseShape) {
-    return mergeStyleOption(shape.getStyleOption());
 }

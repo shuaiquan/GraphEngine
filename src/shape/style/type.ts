@@ -125,7 +125,7 @@ export interface StyleOption {
  */
 export const DEFAULT_STYLE_OPTION: StyleOption = {
     alpha: 1,
-    fillStyle: '#fff',
+    fillStyle: '#000',
     fillAlpha: 1,
     strokeStyle: undefined,
     strokeAlpha: 1,

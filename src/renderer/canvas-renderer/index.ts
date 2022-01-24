@@ -1,7 +1,8 @@
-import { Entity2D } from "../../entity";
+import { Entity2D, EntityUtil } from "../../entity";
 import { BaseShape } from "../../shape";
+import { Text } from "../../text";
 import { getShapePath } from "./shapePath";
-import { getFillAlpha, getShapeStyleOption, getStrokeAlpha, hasFillStyle, hasStrokeStyle } from "./styleUtil";
+import { getFillAlpha, getStrokeAlpha, hasFillStyle, hasStrokeStyle } from "./styleUtil";
 import { getTransformFromMatrix3 } from "./transformUtil";
 
 /**
@@ -36,8 +37,10 @@ class CanvasRenderer {
      * @param entity 
      */
     render(entity: Entity2D) {
-        if (entity instanceof BaseShape) {
+        if (EntityUtil.isShapeEntity(entity)) {
             this.renderShape(entity, this.ctx);
+        } else if (EntityUtil.isTextEntity(entity)) {
+            this.renderText(entity, this.ctx);
         }
     }
 
@@ -54,7 +57,7 @@ class CanvasRenderer {
      * @param ctx 渲染上下文
      */
     private renderShape(shape: BaseShape, ctx: CanvasRenderingContext2D) {
-        const styleOption = getShapeStyleOption(shape);
+        const styleOption = shape.getStyleOption();
 
         const shouldStroke = hasStrokeStyle(styleOption);
         const shouldFill = hasFillStyle(styleOption);
@@ -66,6 +69,14 @@ class CanvasRenderer {
 
             // const preTransform = ctx.getTransform();     // ctx.restore 包括这个吗
             ctx.setTransform(getTransformFromMatrix3(shape.getWorldMatrix()));
+
+            if (shouldFill && !styleOption.onlyStroke) {
+                const { fillStyle } = styleOption;
+                const alpha = getFillAlpha(styleOption);
+                ctx.fillStyle = fillStyle;
+                ctx.globalAlpha = alpha;
+                ctx.fill(path);
+            }
 
             if (shouldStroke) {
                 const { lineCap, lineJoin, miterLimit, lineWidth, lineDash, lineDashOffset, strokeStyle } = styleOption;
@@ -81,12 +92,48 @@ class CanvasRenderer {
                 ctx.stroke(path);
             }
 
-            if (shouldFill) {
-                const { fillStyle } = styleOption;
-                const alpha = getFillAlpha(styleOption);
+            ctx.restore();  // todo 需不需要
+        }
+    }
+
+    private renderText(textEntity: Text, ctx: CanvasRenderingContext2D) {
+        const textStyle = textEntity.getStyleOption();
+
+        const shouldStroke = hasStrokeStyle(textStyle);
+        const shouldFill = hasFillStyle(textStyle);
+
+        if (shouldFill || shouldStroke) {
+            ctx.save();     // todo 需不需要
+
+            ctx.setTransform(getTransformFromMatrix3(textEntity.getWorldMatrix()));
+
+            const { x, y, align, baseline, fontSize, fontFamily, fontStyle, fontWeight, fontVariant } = textStyle;
+            ctx.textAlign = align;
+            ctx.textBaseline = baseline;
+            const ctxFontSize = typeof fontSize === 'number' ? `${fontSize}px` : fontSize;
+            ctx.font = `${fontStyle} ${fontVariant} ${fontWeight} ${ctxFontSize} ${fontFamily}`;
+
+
+            if (shouldFill && !textStyle.onlyStroke) {
+                const { fillStyle } = textStyle;
                 ctx.fillStyle = fillStyle;
+
+                const alpha = getFillAlpha(textStyle);
                 ctx.globalAlpha = alpha;
-                ctx.fill(path);
+
+                ctx.fillText(textEntity.text, x, y);
+            }
+
+            if (shouldStroke) {
+                const { strokeStyle } = textStyle;
+                if (strokeStyle !== undefined) {
+                    ctx.strokeStyle = strokeStyle;
+
+                    const alpha = getStrokeAlpha(textStyle);
+                    ctx.globalAlpha = alpha;
+
+                    ctx.strokeText(textEntity.text, x, y);
+                }
             }
 
             ctx.restore();  // todo 需不需要
