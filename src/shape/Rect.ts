@@ -89,13 +89,6 @@ class Rect extends BaseShape {
     // getHeight() {
     //     return this.height;
     // }
-
-    getPath() {
-        const { x, y, width, height } = this;
-        const path = new Path2D();
-        path.rect(x, y, width, height);
-        return path;
-    }
 }
 
 export { Rect };

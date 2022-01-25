@@ -114,19 +114,6 @@ class BezierCurve extends BaseShape {
     getCP2() {
         return this.cp2;
     }
-
-    getPath() {
-        const { startPoint, endPoint, cp1, cp2 } = this;
-        const path = new Path2D();
-
-        path.moveTo(startPoint.x, startPoint.y);
-        if (cp2) {
-            path.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, endPoint.x, endPoint.y);
-        } else {
-            path.quadraticCurveTo(cp1.x, cp1.y, endPoint.x, endPoint.y);
-        }
-        return path;
-    }
 }
 
 export { BezierCurve };

@@ -47,13 +47,6 @@ class Ellipse extends BaseShape {
     getCenter() {
         return this.center.clone();
     }
-
-    getPath() {
-        const { center, radiusX, radiusY, rotation } = this;
-        const path = new Path2D();
-        path.ellipse(center.x, center.y, radiusX, radiusY, rotation, 0, Math.PI * 2);
-        return path;
-    }
 }
 
 export { Ellipse };

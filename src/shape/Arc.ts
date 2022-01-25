@@ -53,13 +53,6 @@ class Arc extends BaseShape {
     getCenter() {
         return this.center.clone();
     }
-
-    getPath() {
-        const { center, radius, startAngle, endAngle, counterclockwise } = this;
-        const path = new Path2D();
-        path.arc(center.x, center.y, radius, startAngle, endAngle, counterclockwise);
-        return path;
-    }
 }
 
 export { Arc };

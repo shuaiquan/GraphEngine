@@ -52,14 +52,6 @@ class Line extends BaseShape {
     getEnd() {
         return this.end.clone();
     }
-
-    getPath() {
-        const { start, end } = this;
-        const path = new Path2D();
-        path.moveTo(start.x, start.y);
-        path.lineTo(end.x, end.y);
-        return path;
-    }
 }
 
 export { Line };

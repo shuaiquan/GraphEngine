@@ -33,11 +33,6 @@ abstract class BaseShape extends Group {
     getStyleOption() {
         return this.styleOption;
     }
-
-    /**
-     * 获取图形的 Path
-     */
-    abstract getPath(): Path2D;
 }
 
 export { BaseShape };

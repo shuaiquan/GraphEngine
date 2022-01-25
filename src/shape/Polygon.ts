@@ -41,18 +41,6 @@ class Polygon extends BaseShape {
     getPathData() {
         return [...this.pathData];
     }
-
-    getPath() {
-        const path = new Path2D();
-        this.pathData.forEach((point, index) => {
-            if (index === 0) {
-                path.moveTo(point.x, point.y);
-            } else {
-                path.lineTo(point.x, point.y);
-            }
-        });
-        return (this.closed && path.closePath(), path);
-    }
 }
 
 export { Polygon };

@@ -35,12 +35,6 @@ class Circle extends BaseShape {
     getCenter() {
         return this.center.clone();
     }
-
-    getPath() {
-        const path = new Path2D();
-        path.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
-        return path;
-    }
 }
 
 export { Circle };

@@ -54,17 +54,6 @@ class Sector extends BaseShape {
         return this.center.clone();
     }
 
-    getPath() {
-        const { center, radius, startAngle, endAngle, counterclockwise } = this;
-        const path = new Path2D();
-        const startPoint = this.getStartPoint();
-        path.moveTo(center.x, center.y);
-        path.lineTo(startPoint.x, startPoint.y);
-        path.arc(center.x, center.y, radius, startAngle, endAngle, counterclockwise);
-        path.lineTo(center.x, center.y);
-        return path;
-    }
-
     private getStartPoint() {
         return Utils.Circle.getPointByAngle(this.center, this.radius, this.startAngle, !this.counterclockwise);
     }
