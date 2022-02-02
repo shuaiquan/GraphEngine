@@ -1,6 +1,8 @@
 import { Entity2D, EntityUtil } from "../../entity";
+import { Image } from "../../image";
 import { BaseShape } from "../../shape";
 import { Text } from "../../text";
+import { getImageContent } from "./imageUtill";
 import { getShapePath } from "./shapePath";
 import { getFillAlpha, getStrokeAlpha, hasFillStyle, hasStrokeStyle } from "./styleUtil";
 import { getTransformFromMatrix3 } from "./transformUtil";
@@ -41,6 +43,8 @@ class CanvasRenderer {
             this.renderShape(entity, this.ctx);
         } else if (EntityUtil.isTextEntity(entity)) {
             this.renderText(entity, this.ctx);
+        } else if (EntityUtil.isImageEntity(entity)) {
+            this.renderImage(entity, this.ctx);
         }
     }
 
@@ -138,6 +142,21 @@ class CanvasRenderer {
 
             ctx.restore();  // todo 需不需要
         }
+    }
+
+    private renderImage(entity: Image, ctx: CanvasRenderingContext2D) {
+        const image = getImageContent(entity);
+
+        if (!image) {
+            return;
+        }
+
+        const option = entity.getImageOption();
+
+        const width = option.width || image.width;
+        const height = option.height || image.height;
+
+        ctx.drawImage(image, option.x, option.y, width, height);
     }
 }
 

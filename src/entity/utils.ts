@@ -3,6 +3,7 @@ import { Text } from "../text";
 import { Entity2D } from "./entity-2d";
 import { Group } from "./group";
 import { RenderTree } from "./render-tree";
+import { Image } from '../image';
 
 /**
  * 实体模型处理工具函数
@@ -34,6 +35,13 @@ abstract class EntityUtil {
      */
     static isTextEntity(value: any): value is Text {
         return value instanceof Text;
+    }
+
+    /**
+     * 是否是图像实体
+     */
+    static isImageEntity(value: any): value is Image {
+        return value instanceof Image;
     }
 
     /**

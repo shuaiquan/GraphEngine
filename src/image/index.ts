@@ -1,16 +1,29 @@
 import { Entity2D } from "../entity";
 import { ImageOption, mergeImageOption } from "./option";
 
-type ImageParam = string | HTMLImageElement;
+type ImageSrc = string | HTMLImageElement;
 
 class Image extends Entity2D {
-    private image: ImageParam;
+    /**
+     * 图像的原始内容，可以是 string , 也可以是 HTMLImageElement
+     */
+    imageSrc: ImageSrc;
 
+    /**
+     * 图像的绘制配置
+     */
     private option: ImageOption;
 
-    constructor(image: ImageParam, option: Partial<ImageOption> = {}) {
+    // private isReady: boolean = false;
+
+    /**
+     * @param image 图像原始内容
+     * @param option 图像绘制配置，可选
+     */
+    constructor(image: ImageSrc, option: Partial<ImageOption> = {}) {
         super();
-        this.image = image;
+        this.imageSrc = image;
+        this.updateImageOption(option);
     }
 
     /**

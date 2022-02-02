@@ -13,10 +13,14 @@ export interface ImageOption {
     y: number;
     /**
      * 图像的显示宽度
+     * 
+     * @default 图像的实际宽度
      */
     width?: number;
     /**
      * 图像的显示高度
+     * 
+     * @default 图像的实际高度
      */
     height?: number;
 }
