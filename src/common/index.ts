@@ -8,3 +8,11 @@ export function remove<T>(array: T[], item: T | T[]) {
         }
     });
 }
+
+export function removeMatch<T>(array: T[], match: (item: T) => boolean) {
+    array.forEach((item, index) => {
+        if (match(item)) {
+            array.splice(index, 1);
+        }
+    });
+}
