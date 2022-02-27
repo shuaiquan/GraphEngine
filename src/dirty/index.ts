@@ -1,0 +1,1 @@
+export { dirtyProperty } from './dirtyProperty';
