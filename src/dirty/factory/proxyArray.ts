@@ -10,6 +10,8 @@ type FuncName = typeof FuncNames[number];
 
 /**
  * 在数组对象上代理原有方法
+ * @param origin 原数组
+ * @param name 要代理的方法名称
  */
 function proxyFunc<T>(origin: Array<T>, name: FuncName) {
     Object.defineProperty(origin, name, {
@@ -25,7 +27,7 @@ function proxyFunc<T>(origin: Array<T>, name: FuncName) {
 
 /**
  * 代理 Array 会对原数据产生变更的方法
- * @param origin 原始 Array
+ * @param origin 原数组
  */
 function proxyArrayFunc<T>(origin: Array<T>) {
     return FuncNames.reduce((arr, name) => {
