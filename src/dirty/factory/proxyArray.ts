@@ -1,3 +1,5 @@
+import { markDirty } from "../dirtyTag";
+
 /**
  * 需要代理数组方法
  */
@@ -19,7 +21,7 @@ function proxyFunc<T>(origin: Array<T>, name: FuncName) {
         writable: false,
         configurable: false,
         value: function () {
-            // TODO 标记 dirty
+            markDirty(true);
             return Array.prototype[name].apply(this, arguments);
         }
     });
@@ -43,7 +45,7 @@ function proxyArrayFunc<T>(origin: Array<T>) {
 export function proxyArray<T>(origin: Array<T>) {
     return new Proxy(proxyArrayFunc(origin), {
         set(target: T[], key: PropertyKey, value: any) {
-            // TODO 标记 dirty
+            markDirty(true);
             return Reflect.set(target, key, value);
         }
     });

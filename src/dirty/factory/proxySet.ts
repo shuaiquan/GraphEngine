@@ -1,3 +1,5 @@
+import { markDirty } from "../dirtyTag";
+
 /**
  * 需要代理 Map 方法
  */
@@ -19,7 +21,7 @@ function proxyFunc<T>(origin: Set<T>, name: FuncName) {
         writable: false,
         configurable: false,
         value: function () {
-            // TODO 标记 dirty
+            markDirty(true);
             return Set.prototype[name].apply(this, arguments);
         }
     });

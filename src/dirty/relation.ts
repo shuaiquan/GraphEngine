@@ -1,5 +1,5 @@
 import { $OBSERVER, $OPTION } from "./const";
-import { mergeOption, ObserverTarget, OptionPrototype, ObserverOption } from "./type";
+import { mergeOption, ObserverTarget, OptionPrototype, ObserverOption, ObserverOptionData } from "./type";
 import { Observer } from './observer';
 
 /**
@@ -56,17 +56,20 @@ abstract class Relation {
     /**
      * 通过实例对象获取 ObserverOption 配置
      * @param target 实例对象
+     * @param key 目标字段
      * @returns ObserverOption
      */
-    static getOptionByInstance(target: Object): ObserverOption {
+    static getOptionByInstance(target: Object, key: PropertyKey): ObserverOption {
         const property = Object.getPrototypeOf(target);
         if (property) {
-            const option = property[$OBSERVER];
+            const data = property[$OBSERVER] as ObserverOptionData;
+            const option = data && data[key];
             if (option) {
                 return option;
             }
         }
 
+        // 如果没有找到配置，就返回默认的配置
         return mergeOption();
     }
 }
