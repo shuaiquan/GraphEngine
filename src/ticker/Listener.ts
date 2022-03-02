@@ -31,7 +31,7 @@ class Listener {
     /**
      * 回调函数上下文
      */
-    private _context: T;
+    private _context: any;
 
     /**
      * 优先级

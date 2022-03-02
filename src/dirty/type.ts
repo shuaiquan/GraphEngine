@@ -11,9 +11,7 @@ export interface ObserverOption {
 /**
  * 被观察实例的配置数据
  */
-export interface ObserverOptionData {
-    [key: PropertyKey]: ObserverOption;
-}
+export type ObserverOptionData = Record<PropertyKey, ObserverOption>
 
 
 /**

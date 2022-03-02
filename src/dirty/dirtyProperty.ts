@@ -10,7 +10,7 @@ import { mergeOption, ObserverOption } from "./type";
 function bindObserver(option: ObserverOption, property: Object, key: PropertyKey) {
     // step 1. 在原型上记录下 key 所对应的 ObserverOption
     const optionData = Relation.getOrCreateOption(property);
-    optionData[key] = option;
+    optionData[key as any] = option;
 
     // step 2. 通过代理 getter & setter ，将对 key 的读写转发到 Observer 上
     Object.defineProperty(property, key, {

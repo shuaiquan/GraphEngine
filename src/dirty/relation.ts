@@ -62,7 +62,7 @@ abstract class Relation {
     static getOptionByInstance(target: Object, key: PropertyKey): ObserverOption {
         const property = Object.getPrototypeOf(target);
         if (property) {
-            const data = property[$OBSERVER] as ObserverOptionData;
+            const data = property[$OBSERVER];
             const option = data && data[key];
             if (option) {
                 return option;

@@ -9,14 +9,14 @@ class Observer {
     /**
      * key -> value 原始数据储存
      */
-    private values: { [key: PropertyKey]: unknown } = {};
+    private values: Record<PropertyKey, unknown> = {};      // Record 替换原有的：{ [key: PropertyKey]: unknown } ，是因为类型检测 symbol 目前还不被允许做 index signature parameter type
 
     /**
      * 获取属性的值
      * @param key 属性字段
      */
     propertyGet(key: PropertyKey) {
-        return this.values[key];
+        return this.values[key as any];
     }
 
     /**
@@ -31,7 +31,7 @@ class Observer {
         const { deep } = Relation.getOptionByInstance(this, key);
         const proxyValue = deep ? ObserverFactory.observe(value) : value;
         //  step 3. 储存新值
-        this.values[key] = proxyValue;
+        this.values[key as any] = proxyValue;
     }
 }
 
