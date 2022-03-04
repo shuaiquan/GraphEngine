@@ -46,8 +46,8 @@ abstract class Relation {
      * @returns ObserverOptionData
      */
     static getOrCreateOption(prototype: OptionPrototype) {
-        if (!prototype.hasOwnProperty($OBSERVER)) {
-            this.addUnEnumerableProp(prototype, $OBSERVER, {});
+        if (!prototype.hasOwnProperty($OPTION)) {
+            this.addUnEnumerableProp(prototype, $OPTION, {});
         }
 
         return prototype[$OPTION];
@@ -60,10 +60,9 @@ abstract class Relation {
      * @returns ObserverOption
      */
     static getOptionByInstance(target: Object, key: PropertyKey): ObserverOption {
-        const property = Object.getPrototypeOf(target);
-        if (property) {
-            const data = property[$OBSERVER];
-            const option = data && data[key];
+        const optionData = this.findOptionFromPropertyChain(target);
+        if (optionData) {
+            const option = optionData[key];
             if (option) {
                 return option;
             }
@@ -71,6 +70,22 @@ abstract class Relation {
 
         // 如果没有找到配置，就返回默认的配置
         return mergeOption();
+    }
+
+    /**
+     * 从原型链上获取 $OPTION 对象
+     * @param target 实例对象
+     */
+    static findOptionFromPropertyChain(target: Object): ObserverOptionData | undefined {
+        const property = Object.getPrototypeOf(target);
+
+        if (!property) {
+            return undefined;
+        }
+
+        const data = property[$OPTION];
+        // 如果不存在，就沿着原型链一直找，知道 null (应对类层层继承的情况)
+        return data || this.findOptionFromPropertyChain(property);
     }
 }
 
