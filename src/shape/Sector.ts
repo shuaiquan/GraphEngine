@@ -1,4 +1,5 @@
 import { IVec2, Vector2, Utils } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -6,27 +7,27 @@ class Sector extends BaseShape {
     /**
      * 扇形的圆心坐标
      */
-    private center: Vector2 = new Vector2(0, 0);
+    @dirtyProperty private center: Vector2 = new Vector2(0, 0);
 
     /**
      * 扇形的半径
      */
-    radius: number = 0;
+    @dirtyProperty radius: number = 0;
 
     /**
      * 扇形的起始角度（弧度）
      */
-    startAngle: number = 0;
+    @dirtyProperty startAngle: number = 0;
 
     /**
      * 扇形的终止角度（弧度）
      */
-    endAngle: number = 0;
+    @dirtyProperty endAngle: number = 0;
 
     /**
      * 是否逆时针。默认：false
      */
-    counterclockwise: boolean = false;
+    @dirtyProperty counterclockwise: boolean = false;
 
     constructor(center: Vector2, radius: number, startAngle: number, endAngle: number, counterclockwise: boolean = false, styleOption?: Partial<StyleOption>) {
         super(styleOption);

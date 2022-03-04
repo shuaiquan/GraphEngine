@@ -1,3 +1,4 @@
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -5,22 +6,22 @@ class Rect extends BaseShape {
     /**
      * 矩形左上角 X 坐标
      */
-    x: number = 0;
+    @dirtyProperty x: number = 0;
 
     /**
      * 矩形左上角 Y 坐标
      */
-    y: number = 0;
+    @dirtyProperty y: number = 0;
 
     /**
      * 矩形宽度
      */
-    width: number = 0;
+    @dirtyProperty width: number = 0;
 
     /**
      * 矩形高度
      */
-    height: number = 0;
+    @dirtyProperty height: number = 0;
 
     constructor(x: number, y: number, width: number, height: number, styleOption?: Partial<StyleOption>) {
         super(styleOption);

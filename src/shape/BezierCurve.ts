@@ -1,4 +1,5 @@
 import { IVec2, Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -9,22 +10,22 @@ class BezierCurve extends BaseShape {
     /**
      * 起点
      */
-    private startPoint: Vector2 = new Vector2();
+    @dirtyProperty private startPoint: Vector2 = new Vector2();
 
     /**
      * 终点
      */
-    private endPoint: Vector2 = new Vector2();
+    @dirtyProperty private endPoint: Vector2 = new Vector2();
 
     /**
      * 控制点1
      */
-    private cp1: Vector2 = new Vector2();
+    @dirtyProperty private cp1: Vector2 = new Vector2();
 
     /**
      * 控制点2
      */
-    private cp2?: Vector2;
+    @dirtyProperty private cp2?: Vector2;
 
     /**
      * 

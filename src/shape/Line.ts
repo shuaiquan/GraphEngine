@@ -1,4 +1,5 @@
 import { IVec2, Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -6,12 +7,12 @@ class Line extends BaseShape {
     /**
      * 线段的起点
      */
-    private start: Vector2 = new Vector2(0, 0);
+    @dirtyProperty private start: Vector2 = new Vector2(0, 0);
 
     /**
      * 线段的终点
      */
-    private end: Vector2 = new Vector2(0, 0);
+    @dirtyProperty private end: Vector2 = new Vector2(0, 0);
 
     constructor(start: Vector2, end: Vector2, styleOption?: Partial<StyleOption>) {
         super(styleOption);

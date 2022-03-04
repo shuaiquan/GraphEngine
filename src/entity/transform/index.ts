@@ -1,4 +1,5 @@
 import { Matrix3, Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../../dirty";
 
 /**
  * 变换数据
@@ -11,21 +12,21 @@ class Transform {
      * 
      * 默认: Vector2(0, 0)
      */
-    translate: Vector2 = new Vector2(0, 0);
+    @dirtyProperty translate: Vector2 = new Vector2(0, 0);
 
     /**
      * 缩放
      * 
      * 默认: Vector2(1, 1)
      */
-    scale: Vector2 = new Vector2(1, 1);
+    @dirtyProperty scale: Vector2 = new Vector2(1, 1);
 
     /**
      * 旋转
      * 
      * 默认: 0 (弧度)
      */
-    rotate: number = 0;
+    @dirtyProperty rotate: number = 0;
 
     /**
      * 获取变换合成的矩阵

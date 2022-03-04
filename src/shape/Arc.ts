@@ -1,4 +1,5 @@
 import { IVec2, Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -6,22 +7,22 @@ class Arc extends BaseShape {
     /**
      * 圆弧的圆心坐标
      */
-    private center: Vector2 = new Vector2(0, 0);
+    @dirtyProperty private center: Vector2 = new Vector2(0, 0);
 
     /**
      * 圆弧的半径
      */
-    radius: number = 0;
+    @dirtyProperty radius: number = 0;
 
     /**
      * 圆弧的起始角度（弧度）
      */
-    startAngle: number = 0;
+    @dirtyProperty startAngle: number = 0;
 
     /**
      * 圆弧的终止角度（弧度）
      */
-    endAngle: number = 0;
+    @dirtyProperty endAngle: number = 0;
 
     /**
      * 是否逆时针。默认：false

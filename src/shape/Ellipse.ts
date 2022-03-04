@@ -1,4 +1,5 @@
 import { IVec2, Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -6,22 +7,22 @@ class Ellipse extends BaseShape {
     /**
      * 椭圆圆心
      */
-    private center: Vector2 = new Vector2(0, 0);
+    @dirtyProperty private center: Vector2 = new Vector2(0, 0);
 
     /**
      * 椭圆的长轴半径
      */
-    radiusX: number = 0;
+    @dirtyProperty radiusX: number = 0;
 
     /**
      * 椭圆的短轴半径
      */
-    radiusY: number = 0;
+    @dirtyProperty radiusY: number = 0;
 
     /**
      * 椭圆的旋转（弧度）
      */
-    rotation: number = 0;
+    @dirtyProperty rotation: number = 0;
 
     constructor(center: Vector2, radiusX: number, radiusY: number, rotation: number, styleOption?: Partial<StyleOption>) {
         super(styleOption);

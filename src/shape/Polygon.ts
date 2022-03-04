@@ -1,4 +1,5 @@
 import { Vector2 } from "@s7n/math";
+import { dirtyProperty } from "../dirty";
 import { BaseShape } from "./BaseShape";
 import { StyleOption } from "./style";
 
@@ -6,12 +7,12 @@ class Polygon extends BaseShape {
     /**
      * 路径数据
      */
-    private pathData: Vector2[] = [];
+    @dirtyProperty private pathData: Vector2[] = [];
 
     /**
      * 多边形是否闭合（默认：true）
      */
-    closed: boolean = true;
+    @dirtyProperty closed: boolean = true;
 
     constructor(data: Vector2[], styleOption?: Partial<StyleOption>) {
         super(styleOption);

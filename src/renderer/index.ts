@@ -1,3 +1,4 @@
+import { getDirtyTag, markDirty } from "../dirty";
 import { RenderTree } from "../entity";
 import { CanvasRenderer } from "./canvas-renderer";
 
@@ -71,12 +72,14 @@ class Renderer {
      * 渲染当前视口
      */
     private renderViewport() {
-        if (this.renderTree) {
+        console.log('当前实体是否 dirty: ', getDirtyTag())
+        if (this.renderTree && getDirtyTag()) {
             // step 1 清空画布
             this.canvasRenderer.clearCanvas();
             // step 2 重新渲染全部实体模型
             const entities = this.renderTree.flattenTree();
             entities.forEach(entity => this.canvasRenderer.render(entity));
+            markDirty(false);
         }
     }
 

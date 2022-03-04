@@ -1,3 +1,4 @@
+import { dirtyProperty } from "../dirty";
 import { Group } from "../entity";
 import { mergeStyleOption, StyleOption } from './style';
 
@@ -5,7 +6,7 @@ abstract class BaseShape extends Group {
     /**
      * 样式配置
      */
-    protected styleOption: StyleOption;
+    @dirtyProperty protected styleOption: StyleOption;
 
     constructor(styleOption: Partial<StyleOption> = {}) {
         super();
