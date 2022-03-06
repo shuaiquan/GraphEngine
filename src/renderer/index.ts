@@ -72,7 +72,6 @@ class Renderer {
      * 渲染当前视口
      */
     private renderViewport() {
-        console.log('当前实体是否 dirty: ', getDirtyTag())
         if (this.renderTree && getDirtyTag()) {
             // step 1 清空画布
             this.canvasRenderer.clearCanvas();

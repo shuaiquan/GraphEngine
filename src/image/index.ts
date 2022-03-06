@@ -23,7 +23,7 @@ class Image extends Entity2D {
     constructor(image: ImageSrc, option: Partial<ImageOption> = {}) {
         super();
         this.imageSrc = image;
-        this.updateImageOption(option);
+        this.updateImageOption(option, true);
     }
 
     /**

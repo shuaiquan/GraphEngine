@@ -11,3 +11,4 @@ export {
     Sector,
 } from './shape';
 export { Text } from './text';
+export { Image } from './image';

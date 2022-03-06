@@ -1,6 +1,6 @@
 import { Vector2 } from '@s7n/math';
 import React, { useEffect, useRef } from 'react';
-import { Arc, BezierCurve, Canvas2D, Circle, Rect, Ellipse, Line, Polygon, Sector, Text } from '../../../src';
+import { Arc, BezierCurve, Canvas2D, Circle, Rect, Ellipse, Line, Polygon, Sector, Text, Image } from '../../../src';
 import { LineCap, LineJoin } from '../../../src/shape';
 
 /**
@@ -19,6 +19,7 @@ const RenderDemo1 = () => {
                 height,
                 sceneWidthRange: 1200,
                 sceneHeightRange: 900,
+                autoRender: true
             });
 
             const arc1 = new Arc(new Vector2(150, 150), 100, Math.PI / 4, Math.PI / 4 * 3, false, {
@@ -97,8 +98,15 @@ const RenderDemo1 = () => {
             const text2 = new Text('text testing !!!', { x: 150, y: 200, fontSize: 30, align: 'center', fillStyle: '#F6903D', strokeStyle: '#BBDEDE' });
             text2.transform.translate.set(0, 600);
 
+            const image = new Image('https://raw.githubusercontent.com/rayshuai/BikeVisualization/master/%E5%80%9F%E8%BD%A6%E9%87%8F%E8%BF%98%E8%BD%A6%E9%87%8F%E7%83%AD%E5%8A%9B%E5%9B%BE%E9%A1%B9%E7%9B%AE/images/%E8%87%AA%E8%A1%8C%E8%BD%A6%E7%AB%99%E7%82%B9%E5%80%9F%E8%BD%A6%E9%87%8F%E7%83%AD%E5%8A%9B%E5%9B%BE1.png', {
+                width: 300,
+                height: 300,
+                x: 300,
+                y: 600,
+            });
+
             canvas2d.addEntity([
-                arc1, arc2, bezierCurve, circle, ellipse, line, polygon1, polygon1, polygon2, rect, sector1, sector2, text1, text2,
+                arc1, arc2, bezierCurve, circle, ellipse, line, polygon1, polygon1, polygon2, rect, sector1, sector2, text1, text2, image,
             ]);
             canvas2d.render();
         }

@@ -1,3 +1,4 @@
+import { markDirty } from "../../dirty";
 import { Image as ImageEntity } from "../../image";
 
 const imageCache: Map<string, HTMLImageElement> = new Map()
@@ -16,7 +17,8 @@ export function getImageContent(entity: ImageEntity) {
         image.onload = () => {
             // 加入缓存
             imageCache.set(imageSrc, image);
-            // TODO 接入 dirty 机制，加载数据完成，标记为需要重新更新
+            // 图像数据加载完成，标记为脏数据，需要重新渲染
+            markDirty(true);
         }
 
         image.src = imageSrc;
