@@ -4,6 +4,7 @@
         "target": "ES6",
         "jsx": "react",
         "esModuleInterop": true,
+        "experimentalDecorators": true,
         "lib": [
             "DOM",
             "ESNext"

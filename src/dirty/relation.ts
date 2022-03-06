@@ -5,7 +5,7 @@ import { Observer } from './observer';
 /**
  * 用以协调和处理目标对象上 Observer 结构的关系
  * 
- * instance -------------------> prototype
+ * instance ------ .... -------> prototype
  *    +                             +
  *    + [$OBSERVER]: Observer       + [$OPTION]: ObserverOptionData
  */
@@ -62,7 +62,7 @@ abstract class Relation {
     static getOptionByInstance(target: Object, key: PropertyKey): ObserverOption {
         const optionData = this.findOptionFromPropertyChain(target);
         if (optionData) {
-            const option = optionData[key];
+            const option = optionData[key as any];
             if (option) {
                 return option;
             }
