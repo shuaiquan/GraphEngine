@@ -16,3 +16,12 @@ export function removeMatch<T>(array: T[], match: (item: T) => boolean) {
         }
     });
 }
+
+let uuidCount = 0;
+
+/**
+ * 生成 UUID
+ */
+export function generateUUID() {
+    return `${(new Date()).getTime()}${uuidCount++}`;
+}

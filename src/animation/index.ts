@@ -1,0 +1,1 @@
+export { FrameAnimation } from './frameAnimation';
