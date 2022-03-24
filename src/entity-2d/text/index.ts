@@ -1,8 +1,10 @@
 import { dirtyProperty } from "../../dirty";
-import { Entity2D } from "../core/Entity2D";
+import { Entity2D, EntityType } from "../core/Entity2D";
 import { TextStyle } from "./style";
 
 class Text extends Entity2D {
+    protected _entityType: EntityType = EntityType.Text;
+
     /**
      * 文本内容
      */

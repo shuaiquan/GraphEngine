@@ -1,5 +1,5 @@
 import { dirtyProperty } from "../../../dirty";
-import { Entity2D } from "../../core/Entity2D";
+import { Entity2D, EntityType } from "../../core/Entity2D";
 import { BaseStyle } from "./Style";
 
 interface ConstructorOf<T> {
@@ -18,6 +18,8 @@ interface IShapeParam<Shape, Style> {
 }
 
 abstract class ShapeEntity<Shape, Style> extends Entity2D {
+    protected _entityType: EntityType = EntityType.ShapeEntity;
+
     /**
      * 图形的形状信息
      */

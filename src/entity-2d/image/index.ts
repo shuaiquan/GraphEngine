@@ -1,10 +1,12 @@
 import { dirtyProperty } from "../../dirty";
-import { Entity2D } from "../core/Entity2D";
+import { Entity2D, EntityType } from "../core/Entity2D";
 import { ImageStyle } from "./style";
 
 type ImageSrc = string | HTMLImageElement;
 
 class Image extends Entity2D {
+    protected _entityType: EntityType = EntityType.Image;
+
     /**
      * 图像的原始内容，可以是 string , 也可以是 HTMLImageElement
      */

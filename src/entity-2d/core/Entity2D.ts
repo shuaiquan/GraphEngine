@@ -1,10 +1,42 @@
 import { EntityEmitter } from "./EntityEmitter";
 import { Transform2D } from "./Transform2D";
 
+enum EntityType {
+    /**
+     * 普通实体
+     */
+    Entity,
+    /**
+     * 集合实体
+     */
+    Group,
+    /**
+     * 渲染树
+     */
+    RenderTree,
+    /**
+     * 几何图形实体
+     */
+    ShapeEntity,
+    /**
+     * 文本
+     */
+    Text,
+    /**
+     * 图像
+     */
+    Image,
+}
+
 /**
  * 表示一个 2D 下的 Entity 实体类
  */
 class Entity2D extends EntityEmitter {
+    /**
+     * 实体类型
+     */
+    protected _entityType: EntityType = EntityType.Entity;
+
     /**
      * 表示当前实体的父实体
      * 
@@ -32,6 +64,13 @@ class Entity2D extends EntityEmitter {
     zIndex: number = 0;
 
     /**
+     * 获取当前实体的实体类型
+     */
+    getEntityType() {
+        return this._entityType;
+    }
+
+    /**
      * 绑定当前实体的父实体
      * @param parent 父实体
      */
@@ -48,5 +87,6 @@ class Entity2D extends EntityEmitter {
 }
 
 export {
-    Entity2D
+    Entity2D,
+    EntityType,
 }
