@@ -57,4 +57,5 @@ export {
     Combine,
     BaseStyle,
     ShapeEntityConstructor,
+    ShapeEntity,
 }

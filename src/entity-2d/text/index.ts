@@ -3,7 +3,7 @@ import { Entity2D, EntityType } from "../core/Entity2D";
 import { TextStyle } from "./style";
 
 class Text extends Entity2D {
-    protected _entityType: EntityType = EntityType.Text;
+    protected _entityType: EntityType = EntityType.TextEntity;
 
     /**
      * 文本内容

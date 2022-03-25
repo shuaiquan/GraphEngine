@@ -6,7 +6,7 @@ import { Entity2D, EntityType } from "./Entity2D";
  * 表示一个容器/集合，可以将多个实体组合在一起。给容器的变换会应用给所有的子实体
  */
 class Group extends Entity2D {
-    protected _entityType: EntityType = EntityType.Group;
+    protected _entityType: EntityType = EntityType.GroupEntity;
 
     /**
      * 子实体

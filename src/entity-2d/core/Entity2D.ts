@@ -9,7 +9,7 @@ enum EntityType {
     /**
      * 集合实体
      */
-    Group,
+    GroupEntity,
     /**
      * 渲染树
      */
@@ -21,11 +21,11 @@ enum EntityType {
     /**
      * 文本
      */
-    Text,
+    TextEntity,
     /**
      * 图像
      */
-    Image,
+    ImageEntity,
 }
 
 /**
