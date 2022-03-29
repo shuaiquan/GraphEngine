@@ -26,7 +26,7 @@ class Image extends Entity2D {
     constructor(image: ImageSrc, style: Partial<ImageStyle> = {}) {
         super();
         this.imageSrc = image;
-        this.updateImageOption(style, true);
+        this.updateStyle(style, true);
     }
 
     /**
@@ -35,7 +35,7 @@ class Image extends Entity2D {
      * @param style 图像样式
      * @param reset 是否重围初始样式，再应用当前样式。默认: false
      */
-    updateImageOption(style: Partial<ImageStyle>, reset: boolean = false) {
+    updateStyle(style: Partial<ImageStyle>, reset: boolean = false) {
         if (reset) {
             this.style = ImageStyle.mergeStyle(style)
         } else {
