@@ -40,4 +40,5 @@ class Text extends Entity2D {
 
 export {
     Text,
+    TextStyle,
 }

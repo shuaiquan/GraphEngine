@@ -9,7 +9,7 @@ export { Line } from './shape/Line';
 export { Polygon } from './shape/Polygon';
 export { Rect } from './shape/Rect';
 export { Sector } from './shape/Sector';
-export { Text } from './text';
+export { Text, TextStyle } from './text';
 export { Image } from './image';
 export { EntityUtils } from './entityUtils';
 export { ShapeEntity, BaseStyle, Combine } from './shape/base';
