@@ -1,4 +1,5 @@
 import { Entity2D, RenderTree } from "../../entity-2d";
+import { BaseRendererPlugin } from "../base-renderer-plugin";
 import { BaseRenderer } from "./BaseRenderer";
 
 interface IEntityConstructor<T extends Entity2D> {
@@ -9,7 +10,7 @@ interface IEntityRenderer<T extends Entity2D> {
     new(): BaseRenderer<T>
 }
 
-class CanvasRendererPlugin {
+class CanvasRendererPlugin extends BaseRendererPlugin<Entity2D> {
     /**
      * Entity -> Renderer 的映射
      */
@@ -46,6 +47,9 @@ class CanvasRendererPlugin {
     private renderTree: RenderTree = new RenderTree();
 
     constructor(canvas: HTMLCanvasElement) {
+        super(canvas);
+
+        // 初始化 CanvasRenderingContext2D
         this.ctx = canvas.getContext('2d');
 
         if (!this.ctx) {
