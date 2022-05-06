@@ -9,6 +9,8 @@ export {
     Polygon,
     Rect,
     Sector,
-} from './shape';
-export { Text } from './text';
-export { Image } from './image';
+    Text,
+    Image,
+    Entity2D,
+    Group,
+} from './entity-2d';
