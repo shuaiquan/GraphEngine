@@ -1,7 +1,7 @@
 /**
  * CanvasObserver 所支持的交互事件
  */
-export enum CanvasEvent {
+export enum EventName {
     /**
      * 左键按下事件
      */
@@ -40,4 +40,4 @@ export enum CanvasEvent {
     Wheel,
 }
 
-export type BaseEvent = PointerEvent | WheelEvent;
+export type CanvasEvent = PointerEvent | WheelEvent;
