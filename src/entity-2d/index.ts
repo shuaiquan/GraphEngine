@@ -28,3 +28,7 @@ export { Image } from './image';
  * 实体工具类
  */
 export { EntityUtils } from './entityUtils';
+/**
+ * 交互接口
+ */
+export { EntityInteract, InteractEvent } from './interact';

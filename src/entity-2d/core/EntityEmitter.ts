@@ -1,9 +1,10 @@
-import { InteractionType, InteractionEvent } from "../../listener";
+import { EntityInteract, InteractEvent } from "../interact";
+
 
 /**
  * 监听函数的格式
  */
-type Listener = (event: InteractionEvent) => void;
+type Listener = (event: InteractEvent) => void;
 
 /**
  * 监听数据
@@ -31,7 +32,7 @@ class EntityEmitter {
     /**
      * 交互事件对应处理函数
      */
-    private eventMap: Map<InteractionType, ListenerData[]> = new Map();
+    private eventMap: Map<EntityInteract, ListenerData[]> = new Map();
 
     /**
      * 注册交互事件
@@ -39,7 +40,7 @@ class EntityEmitter {
      * @param listener 回调函数
      * @param once 是否只触发一次（默认：false）
      */
-    private addEventListener(type: InteractionType, listener: Listener, once: boolean = false) {
+    private addEventListener(type: EntityInteract, listener: Listener, once: boolean = false) {
         if (!(listener instanceof Function)) {
             throw new Error('listener must be a function');
         }
@@ -57,7 +58,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数（可选，不传时会取消该交互事件下的所有回调函数）
      */
-    private removeEventListener(type: InteractionType, listener?: Listener) {
+    private removeEventListener(type: EntityInteract, listener?: Listener) {
         if (!this.eventMap.has(type)) {
             return this;
         }
@@ -83,7 +84,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数
      */
-    on(type: InteractionType, listener: Listener) {
+    on(type: EntityInteract, listener: Listener) {
         this.addEventListener(type, listener, false);
         return this;
     }
@@ -94,7 +95,7 @@ class EntityEmitter {
      * @param listener 回调函数
      * @returns 
      */
-    once(type: InteractionType, listener: Listener) {
+    once(type: EntityInteract, listener: Listener) {
         this.addEventListener(type, listener, true);
         return this;
     }
@@ -104,7 +105,7 @@ class EntityEmitter {
      * @param type 交互类型
      * @param listener 回调函数
      */
-    off(type: InteractionType, listener: Listener) {
+    off(type: EntityInteract, listener: Listener) {
         this.removeEventListener(type, listener);
         return this;
     }
@@ -113,7 +114,7 @@ class EntityEmitter {
      * 移除该交互类型的全部监听事件
      * @param type 交互类型
      */
-    offAll(type: InteractionType) {
+    offAll(type: EntityInteract) {
         this.removeEventListener(type);
         return this;
     }
@@ -122,7 +123,7 @@ class EntityEmitter {
      * 触发交互事件
      * @param type 交互类型
      */
-    emit(type: InteractionType, event: InteractionEvent) {
+    emit(type: EntityInteract, event: InteractEvent) {
         if (!this.eventMap.has(type)) {
             return;
         }
