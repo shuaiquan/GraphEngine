@@ -1,6 +1,6 @@
 import { Vector2 } from "@s7n/math";
 import { Command } from "../../command";
-import { Entity2D, EntityUtil } from "../../entity";
+import { Entity2D, EntityUtils } from "../../entity-2d";
 import { BaseInteraction, InteractionEvent, InteractionType } from "../../listener";
 import { hitEntityTest } from "./hitEntityTest";
 
@@ -80,7 +80,7 @@ class EntityInteraction extends BaseInteraction {
         const path: HittedPath[] = [];
 
         // step 1 将 point 转化为局部坐标
-        const matrix = entity.getLocalMatrix().invert();
+        const matrix = entity.transform.localMatrix.invert();
         const localPoint = point.applyMatrix3(matrix);
 
         // step 2 检测当前实体是否被命中
@@ -92,9 +92,9 @@ class EntityInteraction extends BaseInteraction {
         }
 
         // step 4 如果存在子树，需要深度优先的找到从根到叶子的冒泡路径
-        if (EntityUtil.isGroup(entity)) {
+        if (EntityUtils.isGroup(entity)) {
             // step 4.1 按照 zIndex 从大到小的顺序进行
-            const children = EntityUtil.sortByZIndex(EntityUtil.filterByVisible(entity.children), false);    // TODO 要考虑过滤不可交互的状态
+            const children = entity.getChildren().filter(child => child.visible).sort((a, b) => a.zIndex - b.zIndex);    // TODO 要考虑过滤不可交互的状态
 
             // step 4.2 找到碰撞到目标点的子树，就停止
             for (let i = 0; i < children.length; i++) {
@@ -133,7 +133,7 @@ class EntityInteraction extends BaseInteraction {
             this.bindCurrentEntity(currentEvent, entity, point);
 
             // 触发目标实体的对应事件
-            entity.emit(type, currentEvent);
+            // entity.emit(type, currentEvent);
 
             // 触发指令执行
             this.commands.forEach(command => command.trigger(type, entity, event));

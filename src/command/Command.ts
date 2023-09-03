@@ -1,4 +1,4 @@
-import { Entity2D } from "../entity";
+import { Entity2D } from "../entity-2d";
 import { InteractionEvent, InteractionType } from "../listener";
 
 class Command {

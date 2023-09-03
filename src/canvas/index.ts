@@ -1,9 +1,8 @@
 import { SceneDragCommand, SceneScaleCommand } from '../command';
-import { Entity2D, RenderTree } from '../entity';
+import { Entity2D, RenderTree, StyleOption } from '../entity-2d';
 import { EntityInteraction } from '../interaction';
 import { DOMListener } from '../listener';
 import { Renderer } from '../renderer';
-import { StyleOption } from '../shape';
 import { DEFAULT_CANVAS_OPTION } from './const';
 import { CanvasOption } from './type';
 

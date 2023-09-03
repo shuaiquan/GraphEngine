@@ -1,5 +1,5 @@
 import { Vector2 } from "@s7n/math";
-import { Entity2D, EntityUtil } from "../entity";
+import { Entity2D, EntityUtils } from "../entity-2d";
 import { InteractionEvent } from "../listener";
 import { Command } from "./Command";
 
@@ -17,13 +17,13 @@ class SceneDragCommand extends Command {
     private lastDragPos?: Vector2;
 
     protected onDragStart(entity: Entity2D, event: InteractionEvent) {
-        if (EntityUtil.isRenderTree(entity)) {
+        if (EntityUtils.isRenderTree(entity)) {
             this.lastDragPos = event.canvasPoint
         }
     }
 
     protected onDragMove(entity: Entity2D, event: InteractionEvent) {
-        if (EntityUtil.isRenderTree(entity)) {
+        if (EntityUtils.isRenderTree(entity)) {
             const currentPos = this.move(entity, event);
 
             this.lastDragPos = currentPos;
@@ -31,7 +31,7 @@ class SceneDragCommand extends Command {
     }
 
     protected onDragEnd(entity: Entity2D, event: InteractionEvent) {
-        if (EntityUtil.isRenderTree(entity)) {
+        if (EntityUtils.isRenderTree(entity)) {
             this.move(entity, event);
 
             this.lastDragPos = undefined;

@@ -1,3 +1,4 @@
-import { CanvasObserver } from './observer';
-import { EventName, CanvasEvent } from './type';
-import { BaseListener } from './listener';
+export { CanvasObserver } from './observer';
+export { EventName, CanvasEvent } from './type';
+export { BaseListener } from './listener';
+export { getCoorFromEvent, EventCoorType } from './utils';

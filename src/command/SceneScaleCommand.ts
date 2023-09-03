@@ -1,4 +1,4 @@
-import { Entity2D, EntityUtil } from "../entity";
+import { Entity2D, EntityUtils } from "../entity-2d";
 import { InteractionEvent } from "../listener";
 import { Command } from "./Command";
 
@@ -18,7 +18,7 @@ class SceneScaleCommand extends Command {
     private static SMALLER_RATIO = 1 / 1.1;
 
     protected onWheel(entity: Entity2D, event: InteractionEvent) {
-        if (EntityUtil.isRenderTree(entity)) {
+        if (EntityUtils.isRenderTree(entity)) {
             const originalEvent = event.originalEvent as WheelEvent;
             const ratio = originalEvent.deltaY > 0 ? SceneScaleCommand.SMALLER_RATIO : SceneScaleCommand.BIGGER_RATIO;
 
